@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import User from './app/models/user'
+import UserController from './app/controllers/UserController'
 
 const routes = new Router()
 
@@ -9,21 +9,7 @@ routes.get('/', (request, response) => {
 })
 
 // Create User with Sequelize test
-routes.post('/usersSequelize', async (request, response) => {
-
-    const { name, email, password } = request.body
-
-    const user = await User.create({
-        name,
-        email,
-        password_hash: password
-    })
-
-    return response.json({
-        message: 'User created sucessfuly',
-        user
-    })
-})
+routes.post('/users', UserController.store)
 
 // Users Array
 const users = [
@@ -33,22 +19,6 @@ const users = [
         password: "159756"
     }
 ]
-
-// Create users
-routes.post('/users', (request, response) => {
-
-    const { name, email, password } = request.body
-
-    const user = {
-        name,
-        email,
-        password
-    }
-
-    users.push(user)
-
-    return response.json(users)
-})
 
 // List users
 routes.get('/users', (request, response) => {
