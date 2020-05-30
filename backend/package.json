@@ -1,15 +1,19 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "license": "MIT",
   "scripts": {
     "start": "nodemon"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "7.0.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^5.5.1"
   }
 }

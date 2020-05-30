@@ -1,13 +1,31 @@
-const express = require('express')
+import { Router } from 'express'
 
-const app = express()
+import User from './app/models/user'
 
-app.use(express.json())
+const routes = new Router()
 
-app.get('/', (request, response) => {
+routes.get('/', (request, response) => {
     return response.json({ message: "Welcome" })
 })
 
+// Create User with Sequelize test
+routes.post('/usersSequelize', async (request, response) => {
+
+    const { name, email, password } = request.body
+
+    const user = await User.create({
+        name,
+        email,
+        password_hash: password
+    })
+
+    return response.json({
+        message: 'User created sucessfuly',
+        user
+    })
+})
+
+// Users Array
 const users = [
     {
         name: "Pedro",
@@ -17,7 +35,7 @@ const users = [
 ]
 
 // Create users
-app.post('/users', (request, response) => {
+routes.post('/users', (request, response) => {
 
     const { name, email, password } = request.body
 
@@ -33,12 +51,12 @@ app.post('/users', (request, response) => {
 })
 
 // List users
-app.get('/users', (request, response) => {
+routes.get('/users', (request, response) => {
     return response.json({ users })
 })
 
 // List users by index
-app.get('/users/:index', (request, response) => {
+routes.get('/users/:index', (request, response) => {
 
     const { index } = request.params
 
@@ -53,7 +71,7 @@ app.get('/users/:index', (request, response) => {
 })
 
 // Update User 
-app.put('/users/:index', (request, response) => {
+routes.put('/users/:index', (request, response) => {
     const { name, email, password } = request.body
 
     const { index } = request.params
@@ -70,7 +88,7 @@ app.put('/users/:index', (request, response) => {
 })
 
 // Delete
-app.delete('/users/:index', (request, response) => {
+routes.delete('/users/:index', (request, response) => {
 
     const { index } = request.params
 
@@ -79,6 +97,4 @@ app.delete('/users/:index', (request, response) => {
     return response.json(users)
 })
 
-app.listen(3333, () => [
-    console.log('💻 Server listening on port 3333 🚪')
-])
+export default routes
