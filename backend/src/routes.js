@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import UserController from './app/controllers/UserController'
+import ChallangeController from './app/controllers/ChallengeController'
 
 const routes = new Router()
 
@@ -66,5 +67,7 @@ routes.delete('/users/:index', (request, response) => {
 
     return response.json(users)
 })
+
+routes.post('/challenges', ChallangeController.store)
 
 export default routes
