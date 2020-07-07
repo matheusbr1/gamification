@@ -1,20 +1,38 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 
-import { LoginStyle, Joystick, Background } from './style'
+import { Container, Joystick } from './style'
+import { Background } from '../../styles/global'
 import JoystickImage from '../../assets/joystick-transparent.png'
 
 function Login() {
+    let history = useHistory();
+
+    function handleSignUp() {
+        history.push('/register')
+    }
+
+    function handleStart() {
+        history.push('/dashboard')
+    }
+
     return (
         <Background>
-            <LoginStyle>
+            <Container>
                 <h1>Login</h1>
                 <input type="password" name="password" placeholder="Enter your password" />
                 <div>
                     <span>If you Don’t have account </span>
-                    <button type="submit">Sign up</button>
+                    <button
+                        type="submit"
+                        id="signup"
+                        onClick={handleSignUp} >Sign up</button>
                 </div>
-                <button type="submit" id="start" >Start</button>
-            </LoginStyle>
+                <button
+                    type="submit"
+                    onClick={handleStart}
+                    id="start" >Start</button>
+            </Container>
             <Joystick src={JoystickImage} alt="Joystick" />
         </Background>
     )

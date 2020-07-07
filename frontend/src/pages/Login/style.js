@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import BackgoundImage from '../../assets/backgound.png'
 
-export const LoginStyle = styled.div`
+export const Container = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:center;
-    max-width:350px;
+    max-width:380px;
+    min-height:380px;
     margin:auto;
     height:100%;
 
@@ -70,13 +70,10 @@ export const Joystick = styled.img`
     position: absolute;
     bottom:50px;
     left:-50px;
-    transform: rotate(45deg)
-`;
+    transform: rotate(45deg);
 
-export const Background = styled.div`
-    background-color: rgba(255, 255, 255, 0.6);
-    background-image: url(${BackgoundImage});
-    background-blend-mode: color;
-    width:100%;
-    height:100%;
-`
+    @media screen and (max-width:768px) {
+        display:none;
+    }
+
+`;

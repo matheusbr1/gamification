@@ -15,8 +15,8 @@ function routes() {
             <Route path="/register" exact component={RegisterPerson} />
             <Route path="/register/avatar" component={RegisterAvatar} />
             <Route path="/register/challenge" component={RegisterChallenge} />
-            <Route path="/Dashboard" component={Dashboard} />
-            <Route path="/Dashboard" component={Ranking} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/ranking" component={Ranking} />
         </Switch>
     )
 }
