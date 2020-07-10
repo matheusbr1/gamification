@@ -11,16 +11,8 @@ export const Container = styled.div`
 
     h1 {
         font-size:60px;
-        margin-bottom: 40px;
-    }
-
-    input {
-        height:80px;
-        border-radius:20px;
-        border: 1px solid;
-        padding: 0 30px;
-        font-size: 25px;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
+        text-align: center;
     }
 
     div {
@@ -30,7 +22,7 @@ export const Container = styled.div`
 
         span {
             font-size: 20px;
-            width: 50%
+            width: 50%;
         }
 
         button {
@@ -45,24 +37,22 @@ export const Container = styled.div`
             &:hover {
                 color:green;
             }
-
         }
     }
 
-    button#start {
-        height:80px;
-        border-radius:20px;
-        border: none;
-        color: #fff;
-        background: #2B95F2;
-        font-size: 40px;
-        font-weight:bold;
-        transition: background 0.2s;
 
-        &:hover {
-            background: #006fd1;
+    @media screen and (max-width:768px) {
+        h1 {
+            font-size: 40px;
+        }
+
+        div {
+            button {
+                font-size: 17px;
+            }
         }
     }
+
 
 `;
 
@@ -75,5 +65,4 @@ export const Joystick = styled.img`
     @media screen and (max-width:768px) {
         display:none;
     }
-
 `;

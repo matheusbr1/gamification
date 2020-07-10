@@ -1,26 +1,29 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHistory } from "react-router-dom";
 
 import { Container, Joystick } from './style'
 import { Background } from '../../styles/global'
 import JoystickImage from '../../assets/joystick-transparent.png'
 
+import Input from '../../components/input'
+import Button from '../../components/button'
+
 function Login() {
     let history = useHistory();
 
-    function handleSignUp() {
+    const handleSignUp = useCallback(() => {
         history.push('/register')
-    }
+    }, [])
 
-    function handleStart() {
+    const handleStart = useCallback(() => {
         history.push('/dashboard')
-    }
+    }, [])
 
     return (
         <Background>
             <Container>
                 <h1>Login</h1>
-                <input type="password" name="password" placeholder="Enter your password" />
+                <Input type="password" name="password" placeholder="Password" />
                 <div>
                     <span>If you Don’t have account </span>
                     <button
@@ -28,10 +31,10 @@ function Login() {
                         id="signup"
                         onClick={handleSignUp} >Sign up</button>
                 </div>
-                <button
+                <Button
                     type="submit"
                     onClick={handleStart}
-                    id="start" >Start</button>
+                    id="start" >Start</Button>
             </Container>
             <Joystick src={JoystickImage} alt="Joystick" />
         </Background>

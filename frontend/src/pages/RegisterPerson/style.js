@@ -20,15 +20,6 @@ export const Container = styled.div`
             margin-bottom: 40px;
         }
 
-        input#name {
-            height:80px;
-            border-radius:20px;
-            border: 1px solid;
-            padding: 0 30px;
-            font-size: 25px;
-            margin-bottom: 25px;
-        }
-
         div {
             p {
                 font-size: 30px;
@@ -52,20 +43,21 @@ export const Container = styled.div`
                 }
             }
         }
+    }
 
-        button#next {
-            height:80px;
-            border-radius:20px;
-            width: 353px;
-            border: none;
-            color: #fff;
-            background: #2B95F2;
-            font-size: 40px;
-            font-weight:bold;
-            transition: background 0.2s;
+    @media screen and (max-width: 768px) {
+        form {
+            h1 {
+                font-size:35px;
+                margin-bottom: 20px;
+            }
 
-            &:hover {
-                background: #006fd1;
+            div {
+                div {
+                    label {
+                        font-size: 25px;
+                    }
+                }
             }
         }
     }
