@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { useHistory } from "react-router-dom";
 
 import { Background, Bullet } from '../../styles/global'
 import { Container } from './style'
@@ -8,8 +9,12 @@ import avatar2 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-02.png'
 
 function RegisterAvatar() {
 
+    const history = useHistory()
+
     const handleSelectedIcon = useCallback(() => {
         console.log('Selected')
+
+        history.push('/dashboard')
     }, [])
 
     return (
@@ -26,19 +31,19 @@ function RegisterAvatar() {
                     <img src={avatar1} onClick={handleSelectedIcon} />
                     <img src={avatar2} onClick={handleSelectedIcon} />
 
-                    <img src={avatar1} />
-                    <img src={avatar2} />
-                    <img src={avatar1} />
-                    <img src={avatar2} />
-                    <img src={avatar1} />
-                    <img src={avatar2} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
 
-                    <img src={avatar1} />
-                    <img src={avatar2} />
-                    <img src={avatar1} />
-                    <img src={avatar2} />
-                    <img src={avatar1} />
-                    <img src={avatar2} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
+                    <img src={avatar1} onClick={handleSelectedIcon} />
+                    <img src={avatar2} onClick={handleSelectedIcon} />
                 </div>
 
                 <div className="bullets">
