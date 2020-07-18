@@ -9,6 +9,13 @@ export const Container = styled.div`
     margin:auto;
     height:100%;
 
+    strong.error {
+        font-size:20px;
+        margin-bottom: 20px;
+        color: tomato;
+        text-align:center
+    }
+
     h1 {
         font-size:60px;
         margin-bottom: 15px;

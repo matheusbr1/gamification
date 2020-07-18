@@ -42,7 +42,13 @@ function Dashboard() {
                         <div>
                             <p className="title">React JS</p>
                             <span className="close" >Close</span>
-                            <p className="description">Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y</p>
+                            <p className="description">Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y
+                            Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade Y Estudar React JS até o módulo X para conseguir desenvolver funcionalidade YEstudar React JS até o módulo X para conseguir desenvolver funcionalidade Y</p>
                             <span className="creation">Created at 27/12 by Fulano</span>
                             <span className="status">Em andamento</span>
                         </div>

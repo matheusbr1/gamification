@@ -5,6 +5,12 @@ export const Container = styled.div`
     justify-content:center;
     height:100vh;
 
+    strong.error {
+        font-size:20px;
+        margin-bottom: 10px;
+        color: tomato;
+    }
+
     form {
         display:flex;
         justify-content:center;
@@ -61,5 +67,4 @@ export const Container = styled.div`
             }
         }
     }
-
 `

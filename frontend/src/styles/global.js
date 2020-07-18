@@ -8,7 +8,6 @@ export default createGlobalStyle`
         padding:0;
         outline:0;
         box-sizing: border-box;
-        overflow-y: hidden;
     }
 
     html,
@@ -17,7 +16,7 @@ export default createGlobalStyle`
         height:100%;
     }
 
-    h1,label,span,p {
+    h1,label,span,p,strong {
         font-family: Roboto, sans-serif;
     }
 
