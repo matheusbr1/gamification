@@ -14,7 +14,9 @@ function RegisterName() {
 
     const $ = document.getElementById.bind(document)
 
-    const { setName, ocupation, setOcupation } = useContext(AppContext)
+    const { Appdata, setName, setOcupation } = useContext(AppContext)
+
+    const { ocupation } = Appdata
 
     const history = useHistory()
 

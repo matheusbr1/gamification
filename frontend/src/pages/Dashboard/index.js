@@ -7,27 +7,17 @@ import { Background, Bullet } from '../../styles/global'
 import { AppContext } from '../../contexts/AppContext'
 import { Container } from './style'
 import Button from '../../components/button'
-import RegisterChallenge from '../RegisterChallenge'
 
 function Dashboard() {
 
-    const { avatar, name, ocupation } = useContext(AppContext)
+    const { Appdata } = useContext(AppContext)
+    const { name, ocupation, avatar } = Appdata
 
     const history = useHistory()
-
-    const data = {
-        avatar,
-        name,
-        ocupation
-    }
 
     const handleCreateChallenge = useCallback(() => {
         history.push('/register/challenge')
     }, [])
-
-    useEffect(() => {
-        localStorage.setItem('@Gamification:data', JSON.stringify(data))
-    }, [data])
 
     return (
         <Background>
