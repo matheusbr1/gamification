@@ -9,6 +9,19 @@ export const Container = styled.div`
     height: 100vh;
     max-height: 1000px;
 
+    div.createTaskButtonContainer {
+        align-self: flex-end;
+        max-width: 225px;
+        max-height:100px;
+        margin-right:10px;
+          
+        button {
+            font-size: 18px !important;
+            padding: 20px;
+        }
+
+    }
+
     div.userDetails {
         display: flex;
         justify-content: space-evenly;
@@ -175,5 +188,4 @@ export const Container = styled.div`
             }
         }
     }
-
 `

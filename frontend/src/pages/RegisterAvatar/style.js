@@ -16,7 +16,6 @@ export const Container = styled.div`
     div {
         max-width: 700px;
         max-height: 400px;
-
         img {
             max-width: calc(100% / 6);
         }
@@ -24,5 +23,9 @@ export const Container = styled.div`
 
     div.bullets {
         display: flex;
+    }
+
+    div.avatars {
+        margin-bottom: 50px;
     }
 `

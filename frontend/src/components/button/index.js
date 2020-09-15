@@ -1,10 +1,13 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 import { ButtonStyle } from './style'
 
 const Button = ({ children, ...rest }) => {
     return (
-        <ButtonStyle type='button' {...rest} >
+        <ButtonStyle
+            type='button'
+            {...rest}
+        >
             {children}
         </ButtonStyle>
     )

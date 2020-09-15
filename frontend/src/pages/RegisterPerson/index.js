@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 
@@ -8,30 +8,28 @@ import { Container } from './style'
 import Input from '../../components/input'
 import Button from '../../components/button'
 import getValidationErros from '../../Utils/getValidationErros'
+import { AppContext } from '../../contexts/AppContext'
 
 function RegisterName() {
 
     const $ = document.getElementById.bind(document)
 
+    const { setName, ocupation, setOcupation } = useContext(AppContext)
+
     const history = useHistory()
 
-    const [ocupation, setOcupation] = useState('')
     const [errors, setErrors] = useState({})
 
     const handleCheckOcupation = useCallback(event => {
-
         setOcupation(event.target.value)
-
     }, [ocupation])
 
     const handleValidate = useCallback(async () => {
 
         const data = {
             name: $('name').value,
-            ocupation: ocupation
+            ocupation
         }
-
-        console.log(data)
 
         try {
             const schema = yup.object().shape({
@@ -53,6 +51,7 @@ function RegisterName() {
     }, [ocupation, errors])
 
     const handleNext = useCallback(() => {
+        setName($('name').value)
         history.push('/register/avatar')
     }, [])
 

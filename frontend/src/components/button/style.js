@@ -6,12 +6,12 @@ export const ButtonStyle = styled.button`
     width: 100%;
     
     max-width: 380px;
-
+    
+    font-size: 40px;
     border-radius:20px;
     border: none;
     color: #fff;
     background: #2B95F2;
-    font-size: 40px;
     font-weight:bold;
     transition: background 0.2s;
     margin: 0 auto;
