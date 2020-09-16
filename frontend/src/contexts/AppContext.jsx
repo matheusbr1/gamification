@@ -10,8 +10,25 @@ const AppProvider = ({ children }) => {
     const [name, setName] = useState(() => handleStorageData().name)
     const [avatar, setAvatar] = useState(() => handleStorageData().avatar)
     const [ocupation, setOcupation] = useState(() => handleStorageData().ocupation)
-    const [challenges, setChallenges] = useState([])
     const [challenge, setChallenge] = useState()
+
+    const [challenges, setChallenges] = useState([{
+        title: 'Estudar React',
+        assignee: 'Matheus Baron',
+        description: 'Estudar React para nos ajudar a criar os componentes da nova plataforma',
+        deadline: '12/12/2021',
+        status: 'open',
+        requester: 'Fulano',
+        createdAt: '2/8/2020'
+    }, {
+        title: 'Estudar Node',
+        assignee: 'Matheus Baron',
+        description: 'Estudar node para desenvolver APIs RESTs',
+        deadline: '2/1/2021',
+        status: 'closed',
+        requester: 'Ciclano',
+        createdAt: '2/8/2020'
+    }])
 
     const Appdata = {
         avatar,

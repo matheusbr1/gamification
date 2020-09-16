@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useState } from 'react'
+import { useHistory } from "react-router-dom";
 
 import { AppContext } from '../../contexts/AppContext'
 import { Background } from '../../styles/global'
@@ -7,6 +8,8 @@ import Button from '../../components/button'
 import Input from '../../components/input'
 
 function RegisterChallenge() {
+
+    const history = useHistory()
 
     const { setChallenge } = useContext(AppContext)
 
@@ -20,15 +23,19 @@ function RegisterChallenge() {
         assignee,
         description,
         deadline,
-        status: 'Open',
-        Requester: 'Fulano',
+        status: 'open',
+        requester: 'Fulano',
         createdAt: `
             ${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}
         `
     }
 
     const handleFormData = useCallback(() => {
-        setChallenge(challangeData)
+        alert('Challenge Created')
+        setTimeout(() => {
+            setChallenge(challangeData)
+            history.push('/dashboard')
+        }, 1000)
     }, [challangeData])
 
     return (
