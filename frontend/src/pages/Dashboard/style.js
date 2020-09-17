@@ -76,12 +76,21 @@ export const Container = styled.div`
         div.challengeBox {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-rows: 50% 50%;
+            overflow: hidden;
             grid-gap: 3% 1%;
+            width: 768px;
+            height: 350px;
+            padding: 2%;
+        }
+
+        div.ring {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             width: 768px;
             height: 350px;
-
             padding: 2%;
         }
 

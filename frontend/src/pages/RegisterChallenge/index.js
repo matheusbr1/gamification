@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react'
 import { useHistory } from "react-router-dom";
+import api from '../../services/api'
 
 import { AppContext } from '../../contexts/AppContext'
 import { Background } from '../../styles/global'
@@ -25,17 +26,14 @@ function RegisterChallenge() {
         deadline,
         status: 'open',
         requester: 'Fulano',
-        createdAt: `
-            ${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}
-        `
+        createdAt: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`
     }
 
-    const handleFormData = useCallback(() => {
+    const handleFormData = useCallback(async () => {
         alert('Challenge Created')
-        setTimeout(() => {
-            setChallenge(challangeData)
-            history.push('/dashboard')
-        }, 1000)
+        setChallenge(challangeData)
+        await api.post('challenges', challangeData)
+        history.push('/dashboard')
     }, [challangeData])
 
     return (

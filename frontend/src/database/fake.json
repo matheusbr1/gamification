@@ -1,0 +1,53 @@
+{
+  "challenges": [
+    {
+      "id": "1",
+      "title": "Estudar React",
+      "assignee": "Matheus Baron",
+      "description": "Estudar React para nos ajudar a criar os componentes da nova plataforma",
+      "deadline": "12/12/2021",
+      "status": "open",
+      "requester": "Fulano",
+      "createdAt": "2/8/2020"
+    },
+    {
+      "id": "2",
+      "title": "Estudar Node",
+      "assignee": "Matheus Baron",
+      "description": "Estudar node para desenvolver APIs RESTs",
+      "deadline": "2/1/2021",
+      "status": "closed",
+      "requester": "Ciclano",
+      "createdAt": "2/8/2020"
+    },
+    {
+      "title": "Testando",
+      "assignee": "Matheus",
+      "description": "Alguma coisa",
+      "deadline": "2020-01-01",
+      "status": "open",
+      "requester": "Fulano",
+      "createdAt": "4/8/2020",
+      "id": "jK6P6aC"
+    },
+    {
+      "title": "Teste 2",
+      "assignee": "Teste 2",
+      "description": "Teste 2",
+      "status": "open",
+      "requester": "Fulano",
+      "createdAt": "4/8/2020",
+      "id": "4jvuwWx"
+    },
+    {
+      "title": "Teste 3",
+      "assignee": "Teste 3",
+      "description": "Teste 3",
+      "deadline": "2020-09-24",
+      "status": "open",
+      "requester": "Fulano",
+      "createdAt": "4/8/2020",
+      "id": "vYkuCA1"
+    }
+  ]
+}

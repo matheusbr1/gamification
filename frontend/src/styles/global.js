@@ -16,7 +16,7 @@ export default createGlobalStyle`
         height:100%;
     }
 
-    h1,label,span,p,strong {
+    h1,h2,h3,label,span,p,strong {
         font-family: Roboto, sans-serif;
     }
 
@@ -38,4 +38,5 @@ export const Bullet = styled.div`
         width: 10px;
         background-color: black;
         margin-right: 5px;
+        cursor: pointer;
 `
