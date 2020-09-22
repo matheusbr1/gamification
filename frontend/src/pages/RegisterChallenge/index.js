@@ -12,7 +12,8 @@ function RegisterChallenge() {
 
     const history = useHistory()
 
-    const { setChallenge } = useContext(AppContext)
+    const { setChallenge, Appdata } = useContext(AppContext)
+    const { name } = Appdata
 
     const [assignee, setAssignee] = useState()
     const [title, setTitle] = useState()
@@ -25,7 +26,7 @@ function RegisterChallenge() {
         description,
         deadline,
         status: 'open',
-        requester: 'Fulano',
+        requester: name,
         createdAt: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`
     }
 

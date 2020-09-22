@@ -13,6 +13,8 @@ const AppProvider = ({ children }) => {
     const [challenge, setChallenge] = useState()
     const [challenges, setChallenges] = useState([])
 
+    const [loading, setLoading] = useState(false)
+
     const Appdata = {
         avatar,
         name,
@@ -36,7 +38,10 @@ const AppProvider = ({ children }) => {
                 setOcupation,
                 setName,
                 setChallenge,
-                setChallenges
+                setChallenges,
+
+                loading,
+                setLoading
             }}>
             {children}
         </AppContext.Provider>

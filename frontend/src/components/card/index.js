@@ -1,15 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { AppContext } from '../../contexts/AppContext'
+
+import api from '../../services/api'
 
 import { Container } from './style'
 
 function Card(props) {
 
-    const handleCloseChallenge = id => {
-        console.log('Close Challenge ', id)
-    }
+    const { Appdata, setChallenges, setLoading } = useContext(AppContext)
+    const { challenges } = Appdata
 
-    const handleReOpenChallenge = id => {
-        console.log('Re-Open Challenge ', id)
+    const handleChangeChallengeStatus = (id, status) => {
+        setLoading(true)
+
+        console.log(`${status} Challenge ${id}`)
+
+        const challengeFiltered = challenges.filter(item => item.id === id)[0]
+
+        api.put(`challenges/${id}`, {
+            ...challengeFiltered,
+            status
+        })
+            .then(() => api.get('challenges'))
+            .then(response => {
+                setChallenges(response.data)
+                setLoading(false)
+            })
     }
 
     return (
@@ -17,11 +34,11 @@ function Card(props) {
             <p className="title">{props.challenge.title}</p>
 
             {(props.challenge.status === 'open') ? (
-                <span className="close-open" onClick={() => handleCloseChallenge('id')} >
+                <span className="close-open" onClick={() => handleChangeChallengeStatus(props.challenge.id, 'closed')} >
                     Close
                 </span>
             ) : (
-                    <span className="close-open" onClick={() => handleReOpenChallenge('id')} >
+                    <span className="close-open" onClick={() => handleChangeChallengeStatus(props.challenge.id, 'open')} >
                         Re-Open
                     </span>
                 )}

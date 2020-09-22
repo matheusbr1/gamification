@@ -21,6 +21,7 @@ export const Container = styled.div`
         position: absolute;
         top: 5px;
         right: 10px;
+        cursor: pointer;
     }
 
     span.status {

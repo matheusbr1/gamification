@@ -15,16 +15,14 @@ function Dashboard() {
 
     const history = useHistory()
 
-    const { Appdata, setChallenges } = useContext(AppContext)
-    const { name, ocupation, avatar, challenges } = Appdata
+    const { Appdata, setChallenges, loading, setLoading } = useContext(AppContext)
+    const { name, ocupation, avatar, challenges, } = Appdata
 
     const [totalPages, setTotalPages] = useState(0)
     const [challengesPage, setChallengesPage] = useState(4)
     const [openChallenges, setOpenChallenges] = useState(0)
 
     const [userStars, setUserStars] = useState(4)
-
-    const [loading, setLoading] = useState(false)
 
     const handleCreateChallenge = useCallback(() => {
         history.push('/register/challenge')
@@ -34,7 +32,7 @@ function Dashboard() {
         api.get('challenges').then(response => {
             setOpenChallenges(() => response.data.filter(challenge => challenge.status === 'open').length)
         })
-    }, [])
+    }, [challenges])
 
     useEffect(() => {
         getMoreItens(1)
@@ -46,10 +44,15 @@ function Dashboard() {
         return api.get(`challenges?_page=${page}&_limit=${challengesPage}`).then(response => {
 
             const countItens = parseInt(response.headers['x-total-count'])
+
             if (countItens <= challengesPage) {
                 setTotalPages(1)
             } else {
-                setTotalPages(Math.floor(countItens / challengesPage + 1))
+                setTotalPages(() => {
+                    const conditional = countItens % 2 === 0 && challengesPage % 2 === 0
+                    return conditional ? Math.floor(countItens / challengesPage) :
+                        Math.floor(countItens / challengesPage + 1)
+                })
             }
 
             setChallenges(response.data)
@@ -69,7 +72,6 @@ function Dashboard() {
     const bulletsPagination = () => {
         let bullets = []
         for (let i = 1; i <= totalPages; i++) bullets.push(i)
-        // return bullets.map(page => <Bullet key={page} onClick={() => getMoreItens(page)} >*</Bullet>)
         return (bullets.length > 1) && (bullets.map(page => <Bullet key={page} onClick={() => getMoreItens(page)} >*</Bullet>))
     }
 
@@ -94,7 +96,7 @@ function Dashboard() {
                     {(loading) ? (
                         <div className="ring"> <Ring size={60} /> </div>
                     ) :
-                        (challenges.length === 0) ? (
+                        (challenges.length === 0 && openChallenges.length === 0) ? (
                             <h2>You don’t have any challange</h2>
                         ) :
                             (<>
