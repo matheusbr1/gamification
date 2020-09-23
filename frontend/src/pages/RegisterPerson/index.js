@@ -1,10 +1,9 @@
 import React, { useCallback, useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
-
 import { Background } from '../../styles/global'
 import { Container } from './style'
-
+import Title from '../../components/title'
 import Input from '../../components/input'
 import Button from '../../components/button'
 import getValidationErros from '../../Utils/getValidationErros'
@@ -61,7 +60,7 @@ function RegisterName() {
         <Background>
             <Container>
                 <form>
-                    <h1>Complete your first mission</h1>
+                    <Title>Complete your first mission</Title>
                     <Input id="name" type="text" placeholder="Name" />
                     {(errors.name) && <strong class="error">{errors.name}</strong>}
                     <div>

@@ -1,5 +1,4 @@
 import React, { useState, createContext, useEffect } from 'react'
-
 export const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
@@ -23,12 +22,12 @@ const AppProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        (challenge !== undefined) && (setChallenges([...challenges, challenge]))
-    }, [challenge])
-
-    useEffect(() => {
         localStorage.setItem('@Gamification:data', JSON.stringify(Appdata))
     }, [Appdata])
+
+    useEffect(() => {
+        (challenge !== undefined) && (setChallenges([...challenges, challenge]))
+    }, [challenge])
 
     return (
         <AppContext.Provider

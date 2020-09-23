@@ -1,8 +1,9 @@
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useHistory } from "react-router-dom";
-
-import { Background, Bullet } from '../../styles/global'
-import { Container } from './style'
+import Title from '../../components/title'
+import { Background } from '../../styles/global'
+import Bullet from '../../components/bullets'
+import { Container, Avatars } from './style'
 
 import avatar1 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-01.png'
 import avatar2 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-02.png'
@@ -27,7 +28,7 @@ import { AppContext } from '../../contexts/AppContext'
 
 function RegisterAvatar() {
 
-    const Avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12, avatar13, avatar14, avatar15, avatar16, avatar17, avatar18]
+    const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12, avatar13, avatar14, avatar15, avatar16, avatar17, avatar18]
 
     const history = useHistory()
 
@@ -41,22 +42,18 @@ function RegisterAvatar() {
     return (
         <Background>
             <Container>
-                <h1>Choose your avatar</h1>
 
-                <div className='avatars' >
-                    {Avatars.map(avatar => <img
+                <Title>Choose your avatar</Title>
+
+                <Avatars>
+                    {avatars.map(avatar => <img
                         key={avatar}
                         src={avatar}
                         onClick={() => handleSelectedIcon(avatar)}
                     />)}
-                </div>
+                </Avatars>
 
-                <div className="bullets">
-                    <Bullet>*</Bullet>
-                    <Bullet>*</Bullet>
-                    <Bullet>*</Bullet>
-                </div>
-
+                <Bullet totalPages={2} origin='RegisterAvatar' />
             </Container>
         </Background>
     )

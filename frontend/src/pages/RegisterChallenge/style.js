@@ -10,17 +10,13 @@ export const Container = styled.div`
     height: 100vh;
     width: 100%;
 
-    h1 {
-        font-size: 45px;
-    }
-
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
         max-width: 600px;
 
-        margin: 40px 0;
+        margin: 10px 0;
 
         input {
             width:100%;
@@ -32,6 +28,12 @@ export const Container = styled.div`
             font-size: 25px;
             margin-left:10px;
         }
+    }
+
+    @media(max-width: 768px) {
+        width: 90%;
+        margin: 5% auto;
+        height: unset;
     }
 `
 

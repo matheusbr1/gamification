@@ -60,7 +60,10 @@ function Login() {
                 <Button
                     type="submit"
                     onClick={handleValidate}
-                    id="start" >Start</Button>
+                    id="start"
+                >
+                    Start
+                </Button>
             </Container>
             <Joystick src={JoystickImage} alt="Joystick" />
         </Background>

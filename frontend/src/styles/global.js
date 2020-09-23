@@ -31,12 +31,3 @@ export const Background = styled.div`
     width:100%;
     height:100%;
 `
-
-export const Bullet = styled.div`
-        border-radius: 50%;
-        height: 10px;
-        width: 10px;
-        background-color: black;
-        margin-right: 5px;
-        cursor: pointer;
-`

@@ -6,7 +6,6 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     height: 100vh;
 
     h1 {
@@ -21,11 +20,18 @@ export const Container = styled.div`
         }
     }
 
-    div.bullets {
-        display: flex;
+    @media(max-width: 768px) {
+        h1 {
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
     }
+`
 
-    div.avatars {
-        margin-bottom: 50px;
+export const Avatars = styled.div`
+    margin-bottom: 50px;
+
+    @media(max-width: 768px) {
+        margin-bottom: 30px;
     }
 `

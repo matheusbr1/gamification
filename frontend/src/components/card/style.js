@@ -2,8 +2,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-   /* border: solid 2px; */
-   padding:2%;
+   padding:3%;
 
    ${(props) => props.status === 'open' ? css`
          background: #F0B41A;
@@ -12,9 +11,7 @@ export const Container = styled.div`
     `}
 
     opacity: 0.7;
-
     border-radius: 10px;
-
     position: relative;
 
     span.close-open {
@@ -34,18 +31,33 @@ export const Container = styled.div`
         position: absolute;
         bottom: 5px;
         left: 10px;
+        font-size: 0.8em;
+    }
+
+    span.deadline {
+        position: absolute;
+        bottom: 25px;
+        left: 10px;
+        font-size: 0.8em;
     }
 
     p.title {
         font-size: 25px;
+
+        @media(max-width: 768px) {
+            font-size: 20px;
+        }
     }
 
     p.description {
         font-size: 15px;
-        margin: 10px 0px;
-
-        max-height: 50px;
-
+        margin: 6px 0px;
+        max-height: 65px;
         overflow:auto;
+
+        @media(max-width: 768px) {
+            margin: 6px 0px;
+            max-height: 48px;
+        }
     }
  `

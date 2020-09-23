@@ -53,8 +53,8 @@ export const Container = styled.div`
     @media screen and (max-width: 768px) {
         form {
             h1 {
-                font-size:35px;
-                margin-bottom: 20px;
+                font-size: 28px;
+                margin: 20px;
             }
 
             div {

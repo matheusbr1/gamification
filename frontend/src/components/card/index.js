@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-
 import { AppContext } from '../../contexts/AppContext'
-
-import api from '../../services/api'
-
 import { Container } from './style'
+import api from '../../services/api'
 
 function Card(props) {
 
     const { Appdata, setChallenges, setLoading } = useContext(AppContext)
     const { challenges } = Appdata
+    const { currentChallengePage, challengesPage } = props
 
     const handleChangeChallengeStatus = (id, status) => {
         setLoading(true)
@@ -22,9 +20,10 @@ function Card(props) {
             ...challengeFiltered,
             status
         })
-            .then(() => api.get('challenges'))
+            .then(() => api.get(`challenges?_page=${currentChallengePage}&_limit=${challengesPage}`))
             .then(response => {
                 setChallenges(response.data)
+                console.log(response.data)
                 setLoading(false)
             })
     }
@@ -32,7 +31,6 @@ function Card(props) {
     return (
         <Container status={props.challenge.status} >
             <p className="title">{props.challenge.title}</p>
-
             {(props.challenge.status === 'open') ? (
                 <span className="close-open" onClick={() => handleChangeChallengeStatus(props.challenge.id, 'closed')} >
                     Close
@@ -42,8 +40,10 @@ function Card(props) {
                         Re-Open
                     </span>
                 )}
-
             <p className="description">{props.challenge.description}</p>
+            <span className="deadline">
+                Deadline {props.challenge.deadline}
+            </span>
             <span className="creation">
                 Created at {props.challenge.createdAt} by {props.challenge.requester}
             </span>

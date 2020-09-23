@@ -6,7 +6,7 @@
       "assignee": "Matheus Baron",
       "description": "Estudar React para nos ajudar a criar os componentes da nova plataforma",
       "deadline": "12/12/2021",
-      "status": "closed",
+      "status": "open",
       "requester": "Fulano",
       "createdAt": "2/8/2020"
     },
@@ -31,20 +31,11 @@
       "id": "jK6P6aC"
     },
     {
-      "title": "Teste 2",
-      "assignee": "Teste 2",
-      "description": "Teste 2",
-      "status": "open",
-      "requester": "Fulano",
-      "createdAt": "4/8/2020",
-      "id": "4jvuwWx"
-    },
-    {
       "title": "Teste 3",
       "assignee": "Teste 3",
       "description": "Teste 3",
       "deadline": "2020-09-24",
-      "status": "close",
+      "status": "open",
       "requester": "Fulano",
       "createdAt": "4/8/2020",
       "id": "vYkuCA1"
@@ -60,23 +51,277 @@
       "id": "G0EeGFv"
     },
     {
-      "title": "Teste via insomnia",
+      "title": "assssssss",
       "assignee": "fsda",
-      "description": "fsda",
-      "status": "open",
-      "requester": "Fulano",
-      "createdAt": "3/8/2020",
-      "id": "x1w5vKb"
-    },
-    {
-      "title": "Estudar tal coisa",
-      "assignee": "Fulano de tal",
-      "description": "Fazer tal coisa",
-      "deadline": "2020-09-24",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "deadline": "2020-09-23",
       "status": "open",
       "requester": "Matheus",
       "createdAt": "2/8/2020",
-      "id": "_WXieRY"
+      "id": "1LVjDCf"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      "deadline": "2020-09-23",
+      "status": "open",
+      "requester": "Matheus",
+      "createdAt": "2020-8-2",
+      "id": "i4QfxNv"
+    },
+    {
+      "title": "dasD",
+      "assignee": "dsa",
+      "description": "SA",
+      "deadline": "2020-09-08",
+      "status": "open",
+      "requester": "Matheus",
+      "createdAt": "2020-8-2",
+      "id": "vUsKgAN"
+    },
+    {
+      "title": "fdsafdsa",
+      "assignee": "Teste ",
+      "description": "fdsafdsafsdafdsafsdafsda",
+      "deadline": "2020-09-23",
+      "status": "open",
+      "requester": "Matheus",
+      "createdAt": "2020-8-2",
+      "id": "iZPIHyq"
+    },
+    {
+      "title": "Estudar Alguma coisa",
+      "assignee": "Karina",
+      "description": "Estudar alguma coisa",
+      "deadline": "2020-09-30",
+      "status": "open",
+      "requester": "fsdafdsafsda",
+      "createdAt": "2020-8-2",
+      "id": "9RdFrv7"
+    },
+    {
+      "title": "Teste",
+      "assignee": "Matheus",
+      "description": "fdasfdsa",
+      "deadline": "2020-09-16",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "lO-qGAt"
+    },
+    {
+      "title": "FSDA",
+      "assignee": "FDASFDSA",
+      "description": "FSDA",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "oiACgGX"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "s3Kd9K7"
+    },
+    {
+      "title": "fsd",
+      "assignee": "fas",
+      "description": "afsda",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "JO5oo81"
+    },
+    {
+      "title": "fsda",
+      "assignee": "fdsa",
+      "description": "fsda",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "IBxexU4"
+    },
+    {
+      "title": "fdsafdsa",
+      "assignee": "fdsa",
+      "description": "fads",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "abV5SRo"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdas",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "ReQjQ1M"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fds",
+      "description": "fdsa",
+      "deadline": "2020-09-18",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "nUzD8w1"
+    },
+    {
+      "title": "fsda",
+      "assignee": "dfsafdsa",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "G5py-N1"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "zLOlh0U"
+    },
+    {
+      "title": "fsda",
+      "assignee": "fdsa",
+      "description": "fdsa",
+      "deadline": "2020-09-10",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "0VCCjoY"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "i8ljxby"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fsda",
+      "description": "fsda",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "M_ZH_lF"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "fsda",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "MiXjzcr"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsafsda",
+      "description": "fdsa",
+      "status": "closed",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "gUoRWo7"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdsa",
+      "description": "fdsa",
+      "status": "closed",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "6NBRlXA"
+    },
+    {
+      "title": "fdsa",
+      "assignee": "fdas",
+      "description": "fdsa",
+      "status": "open",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "GKLkOaG"
+    },
+    {
+      "title": "fsda",
+      "assignee": "fsda",
+      "description": "fsda",
+      "status": "closed",
+      "requester": "Matheus Baron ",
+      "createdAt": "2020-8-2",
+      "id": "PVzomuk"
+    }
+  ],
+  "users": [
+    {
+      "name": "Matheus",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png",
+      "stars": "5",
+      "completeTasks": "2",
+      "id": "1"
+    },
+    {
+      "name": "João",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-14.8f8fc664.png",
+      "stars": "4",
+      "completeTasks": "6",
+      "id": "2"
+    },
+    {
+      "name": "Ferreira",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-02.b1809557.png",
+      "stars": "3",
+      "completeTasks": "10",
+      "id": "3"
+    },
+    {
+      "name": "Rivaldo",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png",
+      "stars": "5",
+      "completeTasks": "1",
+      "id": "4"
+    },
+    {
+      "name": "Cleberneisoniano",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png",
+      "stars": "1",
+      "completeTasks": "30",
+      "id": "5"
+    },
+    {
+      "name": "Zico",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-02.b1809557.png",
+      "stars": "2",
+      "completeTasks": "29",
+      "id": "6"
+    },
+    {
+      "name": "Fulano",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-14.8f8fc664.png",
+      "stars": "2",
+      "completeTasks": "29",
+      "id": "7"
+    },
+    {
+      "name": "Ciclano",
+      "avatar": "Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png",
+      "stars": "2",
+      "completeTasks": "29",
+      "id": "8"
     }
   ]
 }
