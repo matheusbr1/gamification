@@ -10,8 +10,7 @@ import UserStars from '../../Utils/userStars'
 import Bullets from '../../components/bullets'
 import Title from '../../components/title'
 import rankingIcon from '../../assets/RankingIcon.png'
-
-import { Container, UserDetails, RankingIcon, Challenges } from './style'
+import { Container, UserDetails, RankingIcon, Challenges, ButtonCreateTaskContainer } from './style'
 
 function Dashboard() {
 
@@ -72,9 +71,9 @@ function Dashboard() {
     return (
         <Background>
             <Container>
-                {ocupation === 'coordinator' && (<div className="createTaskButtonContainer">
+                {ocupation === 'coordinator' && (<ButtonCreateTaskContainer>
                     <Button onClick={handleCreateChallenge} >Create a challenge</Button>
-                </div>)}
+                </ButtonCreateTaskContainer>)}
 
                 <RankingIcon src={rankingIcon} className="rankingIcon" onClick={handleNatigateToRanking} />
 

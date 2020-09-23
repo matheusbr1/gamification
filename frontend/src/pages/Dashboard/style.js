@@ -14,34 +14,32 @@ export const Container = styled.div`
         padding: 4% 0;
         overflow-y: auto;
     }
+`
 
-    div.createTaskButtonContainer {
+export const ButtonCreateTaskContainer = styled.div`
+    position: absolute;
+    right: 10px;
+    top: 10px;
+      
+    button {
+        font-size: 16px !important;
+        height: 60px;
+        padding: 15px;
+    }
+
+    @media(max-width: 768px) {
         
-        position: absolute;
-        right: 10px;
-        top: 10px;
-          
+        align-self: flex-end;
+        max-width: unset;
+        margin-bottom: 15px;
+        margin-right: 15px;
+        position: unset;
+        
         button {
-            font-size: 16px !important;
-            height: 60px;
-            padding: 15px;
+            font-size: 13px !important;
+            padding: unset;
+            height: 40px !important;
         }
-
-        @media(max-width: 768px) {
-            
-            align-self: flex-end;
-            max-width: unset;
-            margin-bottom: 15px;
-            margin-right: 15px;
-            position: unset;
-            
-            button {
-                font-size: 13px !important;
-                padding: unset;
-                height: 40px !important;
-            }
-        }
-
     }
 `
 
