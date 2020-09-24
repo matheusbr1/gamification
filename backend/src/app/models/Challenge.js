@@ -5,7 +5,10 @@ class Challenge extends Model {
         super.init({
             title: Sequelize.STRING,
             description: Sequelize.STRING,
-            password_hash: Sequelize.STRING
+            deadline: Sequelize.DATE,
+            requester: Sequelize.STRING,
+            assignee: Sequelize.STRING,
+            status: Sequelize.STRING
         }, {
             sequelize
         })

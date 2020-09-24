@@ -1,0 +1,16 @@
+Create migration in sequelize
+yarn sequelize migration:create --name=create-challanges
+
+Push migrations on database
+yarn sequelize db:migrate
+
+Remove migrations from database
+yarn sequelize db:migrate:undo
+
+--------------------
+pass to pass to starts backend of application
+
+on backend folder run yarn start
+initialize docker
+on cmd run docker ps -a for list containers
+initialize the container of database with command docker start gamification_database

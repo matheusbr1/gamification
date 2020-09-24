@@ -19,6 +19,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      deadline: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      requester: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      assignee: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false
