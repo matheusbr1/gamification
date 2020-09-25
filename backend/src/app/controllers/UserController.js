@@ -1,4 +1,5 @@
 import User from '../models/User'
+import { hash } from 'bcryptjs'
 
 class UserController {
     async store(request, response) {
@@ -13,10 +14,13 @@ class UserController {
             return response.status(400).json({ message: 'This email is already used' })
         }
 
+        const saltRounds = 8;
+        const password_hash = await hash(password, saltRounds)
+
         const user = await User.create({
             name,
             email,
-            password_hash: password,
+            password_hash,
             coordinator
         })
 

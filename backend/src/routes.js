@@ -1,9 +1,8 @@
 import { Router } from 'express'
 
 import UserController from './app/controllers/UserController'
-import ChallangeController from './app/controllers/ChallengeController'
 import ChallengeController from './app/controllers/ChallengeController'
-import Challenge from './app/models/Challenge'
+import AuthController from './app/controllers/AuthController'
 
 const routes = new Router()
 
@@ -27,7 +26,7 @@ routes.put('/users/:index', UserController.update)
 routes.delete('/users/:index', UserController.delete)
 
 // Create Challenge
-routes.post('/challenges', ChallangeController.store)
+routes.post('/challenges', ChallengeController.store)
 
 // List All Challenges
 routes.get('/challenges', ChallengeController.index)
@@ -40,5 +39,8 @@ routes.put('/challenges/:index', ChallengeController.update)
 
 // Challenge Delete
 routes.delete('/challenges/:index', ChallengeController.update)
+
+// AUTENTICAÇÃO
+routes.post('/auth', AuthController.sign)
 
 export default routes

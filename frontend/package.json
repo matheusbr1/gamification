@@ -19,7 +19,7 @@
     "yup": "^0.29.1"
   },
   "scripts": {
-    "fake-server": "json-server src/database/fake.json --port 3334 -d 1500 --no-cors --watch src/database/fake.json",
+    "fake-server": "json-server src/database/fake.json --port 3333 -d 1500 --no-cors --watch src/database/fake.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"

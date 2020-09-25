@@ -33,7 +33,7 @@ function Dashboard() {
 
     useEffect(() => {
         api.get('challenges').then(response => {
-            setOpenChallenges(() => response.data.filter(challenge => challenge.status === 'open').length)
+            setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
         })
     }, [challenges])
 
@@ -48,9 +48,15 @@ function Dashboard() {
 
         setLoading(true)
         setChallenges([])
-        return api.get(`challenges?_page=${page}&_limit=${challengesPage}`).then(response => {
+        return api.get(`challenges?_page=${page}&_limit=${challengesPage}`).then(async response => {
 
-            const countItens = parseInt(response.headers['x-total-count'])
+            const { challenges, count } = response.data
+
+            let countItens = parseInt(response.headers['x-total-count'])
+
+            if (isNaN(countItens)) {
+                countItens = count
+            }
 
             if (countItens <= challengesPage) {
                 setTotalPages(1)
@@ -62,9 +68,9 @@ function Dashboard() {
                 })
             }
 
-            setChallenges(response.data)
+            setChallenges(challenges)
             setLoading(false)
-            console.log(response.data)
+            console.log(challenges)
         })
     })
 
@@ -94,16 +100,14 @@ function Dashboard() {
                             (<>
                                 <Title>Your Challenges</Title>
                                 <div className="challengeBox" >
-                                    {challenges.map(challenge => {
-                                        return (
-                                            <Card
-                                                key={challenge.id}
-                                                challengesPage={challengesPage}
-                                                currentChallengePage={currentChallengePage}
-                                                challenge={challenge}
-                                            />
-                                        )
-                                    })}
+                                    {challenges.map(challenge => (
+                                        <Card
+                                            key={challenge.id}
+                                            challengesPage={challengesPage}
+                                            currentChallengePage={currentChallengePage}
+                                            challenge={challenge}
+                                        />
+                                    ))}
                                 </div>
                                 <Bullets totalPages={totalPages} getMoreItens={getMoreItens} origin='Dashboard' />
                             </>)}

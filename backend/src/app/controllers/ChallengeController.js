@@ -22,8 +22,42 @@ class ChallengeController {
 
     async index(request, response) {
 
-        const challenges = await Challenge.findAll()
-        return response.json(challenges)
+        const orderById = array => array.sort(function (a, b) { return a.id - b.id });
+
+        let challenges = await Challenge.findAll()
+
+        challenges = orderById(challenges)
+
+        const count = challenges.length
+
+        response.set("x-total-count", challenges.length);
+
+        // Filter Params for pagination
+        const { _page, _limit } = request.query
+
+        if (_page && _limit) {
+
+            let page = _page * _limit - _limit
+
+            let challangesByPage = await Challenge.findAndCountAll({
+                limit: _limit,
+                offset: page
+            });
+
+            challangesByPage = orderById(challangesByPage.rows)
+
+            console.log(challangesByPage)
+
+            return response.json({
+                count,
+                challenges: challangesByPage
+            })
+        }
+
+        return response.json({
+            count,
+            challenges
+        })
 
     }
 

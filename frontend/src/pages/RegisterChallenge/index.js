@@ -27,8 +27,7 @@ function RegisterChallenge() {
         description,
         deadline,
         status: 'open',
-        requester: name,
-        createdAt: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
+        requester: name
     }
 
     const handleFormData = useCallback(() => {

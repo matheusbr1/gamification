@@ -32,6 +32,9 @@ export const Container = styled.div`
         bottom: 5px;
         left: 10px;
         font-size: 0.8em;
+        max-height: 15px;
+        overflow: auto;
+        max-width: 300px;
     }
 
     span.deadline {

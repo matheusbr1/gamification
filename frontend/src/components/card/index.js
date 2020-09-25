@@ -22,8 +22,8 @@ function Card(props) {
         })
             .then(() => api.get(`challenges?_page=${currentChallengePage}&_limit=${challengesPage}`))
             .then(response => {
-                setChallenges(response.data)
-                console.log(response.data)
+                setChallenges(response.data.challenges)
+                console.log(response.data.challenges)
                 setLoading(false)
             })
     }
