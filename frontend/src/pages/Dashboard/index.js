@@ -1,6 +1,7 @@
 import React, { useContext, useCallback, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../contexts/AppContext'
+import { AuthContext } from '../../contexts/AuthContext'
 import { Background } from '../../styles/global'
 import api from '../../services/api'
 import Button from '../../components/button'
@@ -17,6 +18,8 @@ function Dashboard() {
     const history = useHistory()
 
     const { Appdata, setChallenges, loading, setLoading } = useContext(AppContext)
+    const { token, IsTokenInvalid } = useContext(AuthContext)
+
     const { name, ocupation, avatar, challenges, } = Appdata
     const [totalPages, setTotalPages] = useState(0)
     const [openChallenges, setOpenChallenges] = useState(0)
@@ -31,11 +34,15 @@ function Dashboard() {
         history.push('/ranking')
     }, [])
 
+    const handleNavigateToLogin = useCallback(() => {
+        history.push('/')
+    })
+
     useEffect(() => {
-        api.get('challenges').then(response => {
+        api.get('challenges', { headers: { authorization: `Bearer ${token}` } }).then(response => {
             setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
         })
-    }, [challenges])
+    }, [challenges, token])
 
     useEffect(() => {
         getMoreItens(currentChallengePage)
@@ -48,7 +55,10 @@ function Dashboard() {
 
         setLoading(true)
         setChallenges([])
-        return api.get(`challenges?_page=${page}&_limit=${challengesPage}`).then(async response => {
+
+        return api.get(`challenges?_page=${page}&_limit=${challengesPage}`, {
+            headers: { authorization: `Bearer ${token}` }
+        }).then(async response => {
 
             const { challenges, count } = response.data
 

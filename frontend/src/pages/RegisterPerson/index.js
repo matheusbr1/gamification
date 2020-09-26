@@ -61,7 +61,7 @@ function RegisterName() {
             <Container>
                 <form>
                     <Title>Complete your first mission</Title>
-                    <Input id="name" type="text" placeholder="Name" />
+                    <Input margin={true} id="name" type="text" placeholder="Name" />
                     {(errors.name) && <strong class="error">{errors.name}</strong>}
                     <div>
                         <p>Are you ?</p>

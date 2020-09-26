@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../../contexts/AppContext'
+import { AuthContext } from '../../contexts/AuthContext'
 import { Container } from './style'
 import api from '../../services/api'
 
 function Card(props) {
+
+    const { token } = useContext(AuthContext)
 
     const { Appdata, setChallenges, setLoading } = useContext(AppContext)
     const { challenges } = Appdata
@@ -19,8 +22,12 @@ function Card(props) {
         api.put(`challenges/${id}`, {
             ...challengeFiltered,
             status
+        }, {
+            headers: { authorization: `Bearer ${token}` }
         })
-            .then(() => api.get(`challenges?_page=${currentChallengePage}&_limit=${challengesPage}`))
+            .then(() => api.get(`challenges?_page=${currentChallengePage}&_limit=${challengesPage}`, {
+                headers: { authorization: `Bearer ${token}` }
+            }))
             .then(response => {
                 setChallenges(response.data.challenges)
                 console.log(response.data.challenges)

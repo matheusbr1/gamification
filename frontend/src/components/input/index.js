@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import { InputStyle } from './style'
+import { Container } from './style'
 
 const Input = ({ ...rest }) => {
 
@@ -11,7 +11,7 @@ const Input = ({ ...rest }) => {
     }, [])
 
     return (
-        <InputStyle
+        <Container
             OnFocus={handleInputFocus}
             isFocused={isFocused}
             {...rest} />

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const InputStyle = styled.input`
+export const Container = styled.input`
     height:80px;
     width: 100%;
     max-width: 380px;
@@ -14,6 +14,10 @@ export const InputStyle = styled.input`
         width: 90%;
         height:70px;
     }
+
+    ${props => !props.margin && css`
+        margin: unset;
+    `}
 
     ${props => props.isFocused && css`
         border-color: #2B95F2;

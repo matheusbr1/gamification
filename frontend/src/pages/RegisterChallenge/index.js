@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import { AppContext } from '../../contexts/AppContext'
+import { AuthContext } from '../../contexts/AuthContext'
 import { Background } from '../../styles/global'
 import { Container, TextArea } from './style'
 import api from '../../services/api'
@@ -13,6 +14,7 @@ function RegisterChallenge() {
 
     const history = useHistory()
 
+    const { token } = useContext(AuthContext)
     const { setChallenge, Appdata, loading, setLoading } = useContext(AppContext)
     const { name } = Appdata
 
@@ -34,7 +36,9 @@ function RegisterChallenge() {
         setLoading(true)
         setChallenge(challangeData)
 
-        api.post('challenges', challangeData).then(() => {
+        api.post('challenges', challangeData, {
+            headers: { authorization: `Bearer ${token}` }
+        }).then(() => {
             setLoading(false)
             alert('Challenge Created')
         })
