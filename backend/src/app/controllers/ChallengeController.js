@@ -1,4 +1,5 @@
 import Challenge from '../models/Challenge'
+import auth from '../middleware/auth'
 
 class ChallengeController {
     async store(request, response) {

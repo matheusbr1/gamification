@@ -4,6 +4,8 @@ import UserController from './app/controllers/UserController'
 import ChallengeController from './app/controllers/ChallengeController'
 import AuthController from './app/controllers/AuthController'
 
+import auth from './app/middleware/auth'
+
 const routes = new Router()
 
 routes.get('/', (request, response) => {
@@ -20,25 +22,25 @@ routes.get('/users', UserController.list)
 routes.get('/users/:index', UserController.listByIndex)
 
 // Update User 
-routes.put('/users/:index', UserController.update)
+routes.put('/users/:index', auth, UserController.update)
 
 // Delete User
-routes.delete('/users/:index', UserController.delete)
+routes.delete('/users/:index', auth, UserController.delete)
 
 // Create Challenge
-routes.post('/challenges', ChallengeController.store)
+routes.post('/challenges', auth, ChallengeController.store)
 
 // List All Challenges
-routes.get('/challenges', ChallengeController.index)
+routes.get('/challenges', auth, ChallengeController.index)
 
 // List a Challente by index
-routes.get('/challenges/:index', ChallengeController.listByIndex)
+routes.get('/challenges/:index', auth, ChallengeController.listByIndex)
 
 // Challenge Update
-routes.put('/challenges/:index', ChallengeController.update)
+routes.put('/challenges/:index', auth, ChallengeController.update)
 
 // Challenge Delete
-routes.delete('/challenges/:index', ChallengeController.update)
+routes.delete('/challenges/:index', auth, ChallengeController.update)
 
 // AUTENTICAÇÃO
 routes.post('/auth', AuthController.sign)
