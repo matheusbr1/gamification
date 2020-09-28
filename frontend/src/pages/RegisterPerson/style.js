@@ -7,7 +7,7 @@ export const Container = styled.div`
 
     strong.error {
         font-size:20px;
-        margin-bottom: 10px;
+        margin: 10px 0;
         color: tomato;
     }
 
@@ -25,21 +25,23 @@ export const Container = styled.div`
             margin-bottom: 40px;
         }
 
-        div {
+        > div {
+
+            margin: 25px auto;
+
             p {
                 font-size: 30px;
-                margin-bottom:20px;
             }
 
             div {
                 
                 display: block;
-                margin-bottom:20px;
 
                 input {
                     width: 22px;
                     height: 22px;
                     margin-right:5px;
+                    margin-top: 10px;
                 }
 
                 label {

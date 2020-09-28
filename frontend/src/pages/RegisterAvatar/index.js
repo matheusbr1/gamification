@@ -32,10 +32,11 @@ function RegisterAvatar() {
 
     const history = useHistory()
 
-    const { setAvatar } = useContext(AppContext)
+    const { setAvatar, CreateUser } = useContext(AppContext)
 
     const handleSelectedIcon = useCallback(avatarSelected => {
         setAvatar(avatarSelected)
+        CreateUser()
         history.push('/dashboard')
     }, [])
 

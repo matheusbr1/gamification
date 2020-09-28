@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext, useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup'
 
@@ -7,6 +7,7 @@ import { Background } from '../../styles/global'
 import JoystickImage from '../../assets/joystick-transparent.png'
 
 import { AuthContext } from '../../contexts/AuthContext'
+import { AppContext } from '../../contexts/AppContext'
 
 import Input from '../../components/input'
 import Button from '../../components/button'
@@ -17,13 +18,16 @@ import api from '../../services/api'
 function Login() {
     let history = useHistory();
 
-    const { SaveToken } = useContext(AuthContext)
+    const { SaveToken, setAuthenticated, ClearStoragedToken } = useContext(AuthContext)
+    const { ClearStoragedAppData } = useContext(AppContext)
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [errors, setErrors] = useState({})
 
     const handleSignUp = useCallback(() => {
+        ClearStoragedAppData()
+        ClearStoragedToken()
         history.push('/register')
     }, [])
 
@@ -33,6 +37,8 @@ function Login() {
             email,
             password
         })
+
+        setAuthenticated(true)
 
         SaveToken(sign.data.token)
 

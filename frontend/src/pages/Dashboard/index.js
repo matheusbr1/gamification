@@ -18,7 +18,7 @@ function Dashboard() {
     const history = useHistory()
 
     const { Appdata, setChallenges, loading, setLoading } = useContext(AppContext)
-    const { token, IsTokenInvalid } = useContext(AuthContext)
+    const { token, Authenticated } = useContext(AuthContext)
 
     const { name, ocupation, avatar, challenges, } = Appdata
     const [totalPages, setTotalPages] = useState(0)
@@ -39,12 +39,20 @@ function Dashboard() {
     })
 
     useEffect(() => {
+
+        // Verify if user is authenticated
+        if (!Authenticated) return handleNavigateToLogin()
+
         api.get('challenges', { headers: { authorization: `Bearer ${token}` } }).then(response => {
             setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
         })
     }, [challenges, token])
 
     useEffect(() => {
+
+        // Verify if user is authenticated
+        if (!Authenticated) return handleNavigateToLogin()
+
         getMoreItens(currentChallengePage)
     }, [])
 

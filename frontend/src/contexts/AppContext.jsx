@@ -1,4 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react'
+import api from '../services/api'
+
 export const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
@@ -7,18 +9,37 @@ const AppProvider = ({ children }) => {
     const handleStorageData = () => (storagedData) ? JSON.parse(storagedData) : ''
 
     const [name, setName] = useState(() => handleStorageData().name)
+    const [email, setEmail] = useState(() => handleStorageData().email)
+    const [password, setPassword] = useState()
     const [avatar, setAvatar] = useState(() => handleStorageData().avatar)
-    const [ocupation, setOcupation] = useState(() => handleStorageData().ocupation)
+    const [IsCoordinator, setIsCoordinator] = useState(() => handleStorageData().ocupation)
     const [challenge, setChallenge] = useState()
     const [challenges, setChallenges] = useState([])
 
     const [loading, setLoading] = useState(false)
 
     const Appdata = {
-        avatar,
         name,
-        ocupation,
+        email,
+        IsCoordinator,
+        avatar,
         challenges
+    }
+
+    const ClearStoragedAppData = () => localStorage.removeItem('@Gamification:data')
+
+    const CreateUser = async () => {
+
+        const user = {
+            name,
+            email,
+            password,
+            IsCoordinator,
+            avatar
+        }
+
+        const userCreated = await api.post('/users', user)
+        console.log(userCreated)
     }
 
     useEffect(() => {
@@ -33,9 +54,16 @@ const AppProvider = ({ children }) => {
         <AppContext.Provider
             value={{
                 Appdata,
-                setAvatar,
-                setOcupation,
+                ClearStoragedAppData,
+
+                CreateUser,
+
                 setName,
+                setEmail,
+                setPassword,
+                setIsCoordinator,
+                setAvatar,
+
                 setChallenge,
                 setChallenges,
 

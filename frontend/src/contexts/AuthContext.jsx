@@ -15,18 +15,23 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('@Gamification:auth', JSON.stringify(token))
     }
 
-    const [IsTokenInvalid, setIsTokenInvalid] = useState(false)
+    const ClearStoragedToken = () => localStorage.removeItem('@Gamification:auth');
+
+    const [Authenticated, setAuthenticated] = useState(false)
 
     useEffect(() => {
-        console.log(IsTokenInvalid)
-    }, [IsTokenInvalid])
+        console.log('Authenticated:', Authenticated)
+    }, [Authenticated])
 
     api.interceptors.response.use(response => {
         return response;
     }, error => {
-        if (error.response.status === 401) {
-            setIsTokenInvalid(true)
-            return error
+        const response = error.response
+        if (response.status === 400) {
+            alert(`Error: ${response.data.message}`)
+        }
+        if (response.status !== 400 && response.status !== 401 && response.status !== 403) {
+            setAuthenticated(true)
         }
     })
 
@@ -34,7 +39,9 @@ const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             token,
             SaveToken,
-
+            ClearStoragedToken,
+            Authenticated,
+            setAuthenticated,
         }} >
             { children}
         </AuthContext.Provider>
