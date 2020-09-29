@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback } from 'react'
 import { useHistory } from "react-router-dom";
 import Title from '../../components/title'
 import { Background } from '../../styles/global'
@@ -24,7 +24,7 @@ import avatar16 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-16.png
 import avatar17 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-17.png'
 import avatar18 from '../../assets/Artboards_Diversity_Avatars_by_Netguru-18.png'
 
-import { AppContext } from '../../contexts/AppContext'
+import { useAppData } from '../../contexts/AppContext'
 
 function RegisterAvatar() {
 
@@ -32,7 +32,7 @@ function RegisterAvatar() {
 
     const history = useHistory()
 
-    const { setAvatar, CreateUser } = useContext(AppContext)
+    const { setAvatar, CreateUser } = useAppData()
 
     const handleSelectedIcon = useCallback(avatarSelected => {
         setAvatar(avatarSelected)

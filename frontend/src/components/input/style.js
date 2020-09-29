@@ -16,7 +16,7 @@ export const Container = styled.input`
     }
 
     ${props => !props.margin && css`
-        margin: unset;
+        margin: 0 auto;;
     `}
 
     ${props => props.isFocused && css`

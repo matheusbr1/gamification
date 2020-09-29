@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
-import { AppContext } from '../../contexts/AppContext'
-import { AuthContext } from '../../contexts/AuthContext'
+import React from 'react'
+import { useAppData } from '../../contexts/AppContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Container } from './style'
 import api from '../../services/api'
 
 function Card(props) {
 
-    const { token } = useContext(AuthContext)
+    const { token } = useAuth()
 
-    const { Appdata, setChallenges, setLoading } = useContext(AppContext)
+    const { Appdata, setChallenges, setLoading } = useAppData()
     const { challenges } = Appdata
     const { currentChallengePage, challengesPage } = props
 

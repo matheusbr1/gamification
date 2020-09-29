@@ -1,47 +1,67 @@
-import React, { useContext, useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { AppContext } from '../../contexts/AppContext'
-import { AuthContext } from '../../contexts/AuthContext'
+import { useAppData } from '../../contexts/AppContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Background } from '../../styles/global'
 import api from '../../services/api'
-import Button from '../../components/button'
 import Card from '../../components/card'
 import SpinnerLoading from '../../components/spinnerLoading'
 import UserStars from '../../Utils/userStars'
 import Bullets from '../../components/bullets'
 import Title from '../../components/title'
 import rankingIcon from '../../assets/RankingIcon.png'
-import { Container, UserDetails, RankingIcon, Challenges, ButtonCreateTaskContainer } from './style'
+import { Container, UserDetails, RankingIcon, Challenges, LogOutIcon, CreateIcon } from './style'
 
 function Dashboard() {
 
     const history = useHistory()
 
-    const { Appdata, setChallenges, loading, setLoading } = useContext(AppContext)
-    const { token, Authenticated } = useContext(AuthContext)
+    const {
+        Appdata,
+        setChallenges,
+        setName,
+        setEmail,
+        setIsCoordinator,
+        setAvatar,
+        loading,
+        setLoading
+    } = useAppData()
 
-    const { name, ocupation, avatar, challenges, } = Appdata
+    const { token, Authenticated, signOut } = useAuth()
+
+    const { name, IsCoordinator, avatar, challenges, userId } = Appdata
+
     const [totalPages, setTotalPages] = useState(0)
     const [openChallenges, setOpenChallenges] = useState(0)
     const [currentChallengePage, setCurrentChallengePage] = useState(1)
     const challengesPage = 4
 
-    const handleCreateChallenge = useCallback(() => {
-        history.push('/register/challenge')
-    }, [])
+    const [userStars, setUserStars] = useState(0)
 
-    const handleNatigateToRanking = useCallback(() => {
-        history.push('/ranking')
-    }, [])
+    const handleCreateChallenge = useCallback(() => history.push('/register/challenge'))
+    const handleNatigateToRanking = useCallback(() => history.push('/ranking'))
 
-    const handleNavigateToLogin = useCallback(() => {
-        history.push('/')
-    })
+
+    const getUserData = async () => {
+        const userData = await api.get(`users/${userId}`)
+        const { name, email, coordinator, avatar, stars } = userData.data
+
+        if (!!userData.data) {
+            setName(name)
+            setEmail(email)
+            setIsCoordinator(coordinator)
+            setAvatar(avatar)
+            setUserStars(stars)
+        } else {
+            alert('error')
+        }
+    }
 
     useEffect(() => {
-
         // Verify if user is authenticated
-        if (!Authenticated) return handleNavigateToLogin()
+        if (!Authenticated) return signOut()
+
+        getUserData()
 
         api.get('challenges', { headers: { authorization: `Bearer ${token}` } }).then(response => {
             setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
@@ -51,7 +71,7 @@ function Dashboard() {
     useEffect(() => {
 
         // Verify if user is authenticated
-        if (!Authenticated) return handleNavigateToLogin()
+        if (!Authenticated) return signOut()
 
         getMoreItens(currentChallengePage)
     }, [])
@@ -95,20 +115,22 @@ function Dashboard() {
     return (
         <Background>
             <Container>
-                {ocupation === 'coordinator' && (<ButtonCreateTaskContainer>
-                    <Button onClick={handleCreateChallenge} >Create a challenge</Button>
-                </ButtonCreateTaskContainer>)}
+                <LogOutIcon onClick={signOut} />
+
+                {!!IsCoordinator && (<CreateIcon onClick={handleCreateChallenge} />)}
 
                 <RankingIcon src={rankingIcon} className="rankingIcon" onClick={handleNatigateToRanking} />
 
-                <UserDetails>
-                    <img src={avatar} alt='User Avatar' />
-                    <div>
-                        <p>{name}</p>
-                        <span className="openTasks" >{openChallenges} Open Challenges</span>
-                        <span className="Stars" >{UserStars(5)}</span>
-                    </div>
-                </UserDetails>
+                {name && avatar ? (
+                    <UserDetails>
+                        <img src={avatar} alt='User Avatar' />
+                        <div>
+                            <p>{name}</p>
+                            <span className="openTasks" >{openChallenges} Open Challenges</span>
+                            <span className="Stars" >{UserStars(userStars)}</span>
+                        </div>
+                    </UserDetails>
+                ) : <SpinnerLoading />}
 
                 <Challenges>
                     {(loading) ? <SpinnerLoading /> :
@@ -116,7 +138,10 @@ function Dashboard() {
                             <h2>You don’t have any challange</h2>
                         ) :
                             (<>
-                                <Title>Your Challenges</Title>
+                                <Title>
+                                    Your Challenges
+                                    {!!IsCoordinator && (<CreateIcon onClick={handleCreateChallenge} />)}
+                                </Title>
                                 <div className="challengeBox" >
                                     {challenges.map(challenge => (
                                         <Card

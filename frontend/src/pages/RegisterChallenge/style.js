@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IoIosReturnLeft } from 'react-icons/io'
 
 import Input from '../../components/input'
 
@@ -32,11 +33,18 @@ export const Container = styled.div`
 
     @media(max-width: 768px) {
         width: 90%;
-        margin: 5% auto;
+        margin: 10% auto;
         height: unset;
     }
 `
 
 export const TextArea = styled(Input)`
         min-height:160px;
+`
+
+export const ReturnIcon = styled(IoIosReturnLeft)`
+    font-size: 35px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
 `

@@ -1,13 +1,14 @@
-import React, { useState, createContext, useEffect } from 'react'
+import React, { useState, createContext, useEffect, useContext } from 'react'
 import api from '../services/api'
 
-export const AppContext = createContext()
+const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
 
     const storagedData = localStorage.getItem('@Gamification:data')
     const handleStorageData = () => (storagedData) ? JSON.parse(storagedData) : ''
 
+    const [userId, setUserId] = useState(() => handleStorageData().userId)
     const [name, setName] = useState(() => handleStorageData().name)
     const [email, setEmail] = useState(() => handleStorageData().email)
     const [password, setPassword] = useState()
@@ -19,14 +20,13 @@ const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
 
     const Appdata = {
+        userId,
         name,
         email,
         IsCoordinator,
         avatar,
         challenges
     }
-
-    const ClearStoragedAppData = () => localStorage.removeItem('@Gamification:data')
 
     const CreateUser = async () => {
 
@@ -42,13 +42,11 @@ const AppProvider = ({ children }) => {
         console.log(userCreated)
     }
 
-    useEffect(() => {
-        localStorage.setItem('@Gamification:data', JSON.stringify(Appdata))
-    }, [Appdata])
+    const ClearStoragedAppData = () => localStorage.removeItem('@Gamification:data')
 
-    useEffect(() => {
-        (challenge !== undefined) && (setChallenges([...challenges, challenge]))
-    }, [challenge])
+    useEffect(() => localStorage.setItem('@Gamification:data', JSON.stringify(Appdata)), [Appdata])
+
+    useEffect(() => (challenge !== undefined) && (setChallenges([...challenges, challenge])), [challenge])
 
     return (
         <AppContext.Provider
@@ -58,6 +56,7 @@ const AppProvider = ({ children }) => {
 
                 CreateUser,
 
+                setUserId,
                 setName,
                 setEmail,
                 setPassword,
@@ -76,3 +75,8 @@ const AppProvider = ({ children }) => {
 }
 
 export default AppProvider
+
+export function useAppData() {
+    const context = useContext(AppContext)
+    return context
+}

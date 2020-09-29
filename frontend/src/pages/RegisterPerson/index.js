@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useContext } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import { Background } from '../../styles/global'
@@ -7,13 +7,13 @@ import Title from '../../components/title'
 import Input from '../../components/input'
 import Button from '../../components/button'
 import getValidationErros from '../../Utils/getValidationErros'
-import { AppContext } from '../../contexts/AppContext'
+import { useAppData } from '../../contexts/AppContext'
 
 function RegisterName() {
 
     const $ = document.getElementById.bind(document)
 
-    const { Appdata, setName, setIsCoordinator, setEmail, setPassword } = useContext(AppContext)
+    const { Appdata, setName, setIsCoordinator, setEmail, setPassword } = useAppData()
 
     const { IsCoordinator } = Appdata
 
@@ -22,7 +22,7 @@ function RegisterName() {
     const [errors, setErrors] = useState({})
 
     const handleCheckIsCoordinator = useCallback(event => {
-        setIsCoordinator(event.target.value)
+        setIsCoordinator(event.target.value === 'coordinator' ? true : false)
     }, [IsCoordinator])
 
     const handleValidate = useCallback(async () => {

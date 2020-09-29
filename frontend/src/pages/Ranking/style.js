@@ -25,9 +25,6 @@ export const Container = styled.div`
     }
 `
 
-export const RankingIcon = styled.img`
-    width: 100px;
-`
 export const Avatar = styled.img`
     position: absolute;
     left: 5px;

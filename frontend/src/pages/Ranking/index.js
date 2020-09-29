@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Background } from '../../styles/global'
-import { Container, RankingIcon, Avatar } from './style'
-import { AppContext } from '../../contexts/AppContext'
-import rankingIcon from '../../assets/RankingIcon.png'
+import { Container, Avatar } from './style'
+import { useAppData } from '../../contexts/AppContext'
 import RankingCard from '../../components/rankingCard'
 import api from '../../services/api'
 import SpinnerLoading from '../../components/spinnerLoading'
@@ -13,7 +12,7 @@ import Title from '../../components/title'
 function Ranking() {
 
     const history = useHistory()
-    const { Appdata, loading, setLoading } = useContext(AppContext)
+    const { Appdata, loading, setLoading } = useAppData()
     const { avatar } = Appdata
     const [users, setUsers] = useState([])
 

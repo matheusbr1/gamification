@@ -1,9 +1,9 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useHistory } from "react-router-dom";
-import { AppContext } from '../../contexts/AppContext'
-import { AuthContext } from '../../contexts/AuthContext'
+import { useAppData } from '../../contexts/AppContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { Background } from '../../styles/global'
-import { Container, TextArea } from './style'
+import { Container, TextArea, ReturnIcon } from './style'
 import api from '../../services/api'
 import Button from '../../components/button'
 import Input from '../../components/input'
@@ -14,14 +14,16 @@ function RegisterChallenge() {
 
     const history = useHistory()
 
-    const { token } = useContext(AuthContext)
-    const { setChallenge, Appdata, loading, setLoading } = useContext(AppContext)
+    const { token } = useAuth()
+    const { setChallenge, Appdata, loading, setLoading } = useAppData()
     const { name } = Appdata
 
     const [assignee, setAssignee] = useState()
     const [title, setTitle] = useState()
     const [description, setDescription] = useState()
     const [deadline, setDeadline] = useState()
+
+    const handleNavigateToDashboard = useCallback(() => history.push('/dashboard'))
 
     const challangeData = {
         title,
@@ -52,6 +54,7 @@ function RegisterChallenge() {
             <Container>
                 {(loading ? <SpinnerLoading /> : (
                     <>
+                        <ReturnIcon onClick={handleNavigateToDashboard} />
                         <Title>Create a Challenge</Title>
                         <form>
                             <Input

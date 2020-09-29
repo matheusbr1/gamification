@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import * as yup from 'yup'
 
@@ -6,44 +6,33 @@ import { Container, Joystick } from './style'
 import { Background } from '../../styles/global'
 import JoystickImage from '../../assets/joystick-transparent.png'
 
-import { AuthContext } from '../../contexts/AuthContext'
-import { AppContext } from '../../contexts/AppContext'
+import { useAuth } from '../../contexts/AuthContext'
+import { useAppData } from '../../contexts/AppContext'
 
 import Input from '../../components/input'
 import Button from '../../components/button'
 import getValidationErrors from '../../Utils/getValidationErros'
 
-import api from '../../services/api'
-
 function Login() {
     let history = useHistory();
 
-    const { SaveToken, setAuthenticated, ClearStoragedToken } = useContext(AuthContext)
-    const { ClearStoragedAppData } = useContext(AppContext)
+    const { setAuthenticated, ClearStoragedToken, signIn } = useAuth()
+    const { ClearStoragedAppData } = useAppData()
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [errors, setErrors] = useState({})
+
+    useEffect(() => {
+        setAuthenticated(false)
+        signIn()
+    }, [])
 
     const handleSignUp = useCallback(() => {
         ClearStoragedAppData()
         ClearStoragedToken()
         history.push('/register')
     }, [])
-
-    const handleStart = async () => {
-
-        const sign = await api.post('/auth', {
-            email,
-            password
-        })
-
-        setAuthenticated(true)
-
-        SaveToken(sign.data.token)
-
-        history.push('/dashboard')
-    }
 
     const handleValidate = useCallback(async () => {
 
@@ -62,7 +51,11 @@ function Login() {
 
             await schema.validate(input)
 
-            handleStart()
+            // Logar
+            signIn({
+                email,
+                password
+            })
 
         } catch (err) {
             console.log(err)

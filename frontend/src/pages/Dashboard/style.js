@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IoIosLogOut, IoIosCreate } from 'react-icons/io'
 
 export const Container = styled.div`
     display: flex;
@@ -13,33 +14,6 @@ export const Container = styled.div`
         max-height: unset;
         padding: 4% 0;
         overflow-y: auto;
-    }
-`
-
-export const ButtonCreateTaskContainer = styled.div`
-    position: absolute;
-    right: 10px;
-    top: 10px;
-      
-    button {
-        font-size: 16px !important;
-        height: 60px;
-        padding: 15px;
-    }
-
-    @media(max-width: 768px) {
-        
-        align-self: flex-end;
-        max-width: unset;
-        margin-bottom: 15px;
-        margin-right: 15px;
-        position: unset;
-        
-        button {
-            font-size: 13px !important;
-            padding: unset;
-            height: 40px !important;
-        }
     }
 `
 
@@ -150,4 +124,26 @@ export const UserDetails = styled.div`
         }
      }
 
+`
+
+export const LogOutIcon = styled(IoIosLogOut)`
+    font-size: 40px;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    @media(max-width: 768px) {
+        top: 14px;
+    }
+`
+
+export const CreateIcon = styled(IoIosCreate)`
+    font-size: 40px;
+    position: absolute;
+    top: 20px;
+    right: 65px;
+
+    @media(max-width: 768px) {
+        top: 14px;
+    }
 `
