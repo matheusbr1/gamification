@@ -34,7 +34,7 @@ function RegisterChallenge() {
         requester: name
     }
 
-    const handleFormData = useCallback(() => {
+    const handleFormData = () => {
         setLoading(true)
         setChallenge(challangeData)
 
@@ -45,9 +45,8 @@ function RegisterChallenge() {
             alert('Challenge Created')
         })
 
-        history.push('/dashboard')
-
-    }, [challangeData])
+        handleNavigateToDashboard()
+    }
 
     return (
         <Background>

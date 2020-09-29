@@ -16,21 +16,19 @@ function Ranking() {
     const { avatar } = Appdata
     const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        setLoading(true)
-        getUsers()
-    }, [])
-
-    const handleNavigateToDashboard = useCallback(() => {
-        history.push('/dashboard')
-    })
-
     const getUsers = async () => {
         const users = await api.get('users')
         console.log(users.data)
         setUsers(users.data)
         setLoading(false)
     }
+
+    useEffect(() => {
+        setLoading(true)
+        getUsers()
+    }, [])
+
+    const handleNavigateToDashboard = useCallback(() => history.push('/dashboard'))
 
     return (
         <Background>

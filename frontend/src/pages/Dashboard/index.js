@@ -57,22 +57,22 @@ function Dashboard() {
         }
     }
 
-    useEffect(() => {
-        // Verify if user is authenticated
-        if (!Authenticated) return signOut()
-
-        getUserData()
-
+    const getUserChallenges = useCallback(() => {
         api.get('challenges', { headers: { authorization: `Bearer ${token}` } }).then(response => {
             setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
         })
-    }, [challenges, token])
+    })
 
     useEffect(() => {
-
         // Verify if user is authenticated
         if (!Authenticated) return signOut()
+        getUserData()
+        getUserChallenges()
+    }, [challenges])
 
+    useEffect(() => {
+        // Verify if user is authenticated
+        if (!Authenticated) return signOut()
         getMoreItens(currentChallengePage)
     }, [])
 

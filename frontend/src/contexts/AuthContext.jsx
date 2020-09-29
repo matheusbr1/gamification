@@ -64,10 +64,8 @@ const AuthProvider = ({ children }) => {
             token,
             SaveToken,
             ClearStoragedToken,
-
             Authenticated,
             setAuthenticated,
-
             signIn,
             signOut
         }} >

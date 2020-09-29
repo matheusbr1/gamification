@@ -17,6 +17,8 @@ const AppProvider = ({ children }) => {
     const [challenge, setChallenge] = useState()
     const [challenges, setChallenges] = useState([])
 
+    const ClearStoragedAppData = () => localStorage.removeItem('@Gamification:data')
+
     const [loading, setLoading] = useState(false)
 
     const Appdata = {
@@ -34,15 +36,13 @@ const AppProvider = ({ children }) => {
             name,
             email,
             password,
-            IsCoordinator,
-            avatar
+            avatar,
+            coordinator: IsCoordinator,
         }
 
         const userCreated = await api.post('/users', user)
         console.log(userCreated)
     }
-
-    const ClearStoragedAppData = () => localStorage.removeItem('@Gamification:data')
 
     useEffect(() => localStorage.setItem('@Gamification:data', JSON.stringify(Appdata)), [Appdata])
 
@@ -53,19 +53,15 @@ const AppProvider = ({ children }) => {
             value={{
                 Appdata,
                 ClearStoragedAppData,
-
                 CreateUser,
-
                 setUserId,
                 setName,
                 setEmail,
                 setPassword,
                 setIsCoordinator,
                 setAvatar,
-
                 setChallenge,
                 setChallenges,
-
                 loading,
                 setLoading
             }}>

@@ -6,6 +6,7 @@ export default function ApiInterceptor(setAuthenticated) {
         return response;
     }, error => {
         const response = error.response
+        const status = error.response && error.response.status
 
         console.log('error', error, 'response', response)
 
@@ -13,16 +14,22 @@ export default function ApiInterceptor(setAuthenticated) {
             return alert('Error')
         }
 
-        if (response.status === 401) {
-            alert(`Error: ${response.data.message}`)
-        }
+        if (!!status) {
+            if (status === 404) {
+                return alert(`Error: ${response.data.message}`)
+            }
 
-        if (response.status === 400) {
-            alert(`Error: ${response.data.message}`)
-        }
+            if (status === 401) {
+                return alert(`Error: ${response.data.message}`)
+            }
 
-        if (response.status !== 400 && response.status !== 401 && response.status !== 403) {
-            setAuthenticated(true)
+            if (status === 400) {
+                return alert(`Error: ${response.data.message}`)
+            }
+
+            if (status !== 400 && status !== 401 && status !== 403) {
+                return setAuthenticated(true)
+            }
         }
     })
 } 

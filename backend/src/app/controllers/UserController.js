@@ -46,7 +46,15 @@ class UserController {
             return response.status(404).json({ error: 'User not found' })
         }
 
-        return response.json(user)
+        return response.json({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            coordinator: user.coordinator,
+            avatar: '/static/media/Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png',
+            stars: Math.floor(Math.random() * 5),
+            challenges: []
+        })
     }
 
     async update(request, response) {
