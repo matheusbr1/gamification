@@ -18,7 +18,7 @@ import api from '../../services/api'
 function Login() {
     let history = useHistory();
 
-    const { SaveToken, setAuthenticated, ClearStoragedToken } = useContext(AuthContext)
+    const { SaveToken, setAuthenticated, ClearStoragedToken, token } = useContext(AuthContext)
     const { ClearStoragedAppData } = useContext(AppContext)
 
     const [email, setEmail] = useState()
@@ -31,12 +31,23 @@ function Login() {
         history.push('/register')
     }, [])
 
+    useEffect(() => {
+        if (!!token) {
+            history.push('/dashboard')
+            setAuthenticated(true)
+        }
+    }, [])
+
     const handleStart = async () => {
 
         const sign = await api.post('/auth', {
             email,
             password
         })
+
+        if (!sign) {
+            return alert('Error')
+        }
 
         setAuthenticated(true)
 

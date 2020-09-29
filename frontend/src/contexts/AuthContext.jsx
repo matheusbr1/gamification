@@ -27,12 +27,18 @@ const AuthProvider = ({ children }) => {
         return response;
     }, error => {
         const response = error.response
-        if (response.status === 400) {
-            alert(`Error: ${response.data.message}`)
+
+        if (!!response) {
+            if (response.status === 400) {
+                alert(`Error: ${response.data.message}`)
+            }
+            if (response.status !== 400 && response.status !== 401 && response.status !== 403) {
+                setAuthenticated(true)
+            }
+        } else {
+            return alert('Error')
         }
-        if (response.status !== 400 && response.status !== 401 && response.status !== 403) {
-            setAuthenticated(true)
-        }
+
     })
 
     return (

@@ -36,14 +36,18 @@ function RegisterChallenge() {
         setLoading(true)
         setChallenge(challangeData)
 
+        console.log('Into function that do the request')
+
         api.post('challenges', challangeData, {
-            headers: { authorization: `Bearer ${token}` }
-        }).then(() => {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        }).then(response => {
+            console.log(response)
             setLoading(false)
             alert('Challenge Created')
+            // history.push('/dashboard')
         })
-
-        history.push('/dashboard')
 
     }, [challangeData])
 
