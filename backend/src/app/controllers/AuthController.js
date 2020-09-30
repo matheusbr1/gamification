@@ -37,6 +37,7 @@ class AuthController {
 
         response.json({
             message: 'Authentication successful',
+            user_id: user.id,
             token
         })
     }

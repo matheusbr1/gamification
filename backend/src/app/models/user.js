@@ -7,6 +7,7 @@ class User extends Model {
             name: Sequelize.STRING,
             email: Sequelize.STRING,
             coordinator: Sequelize.BOOLEAN,
+            avatar: Sequelize.STRING,
         }, {
             sequelize
         })

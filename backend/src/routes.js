@@ -3,6 +3,7 @@ import { Router } from 'express'
 import UserController from './app/controllers/UserController'
 import ChallengeController from './app/controllers/ChallengeController'
 import AuthController from './app/controllers/AuthController'
+import RankingController from './app/controllers/RankingController'
 
 import auth from './app/middleware/auth'
 
@@ -44,5 +45,7 @@ routes.delete('/challenges/:index', auth, ChallengeController.update)
 
 // AUTENTICAÇÃO
 routes.post('/auth', AuthController.sign)
+
+routes.get('/ranking', RankingController.list)
 
 export default routes
