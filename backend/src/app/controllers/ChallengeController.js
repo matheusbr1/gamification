@@ -99,6 +99,14 @@ class ChallengeController {
   async listByUser(request, response) {
     const { user_id } = request.params;
 
+    const orderById = (array) =>
+      array.sort(function (a, b) {
+        return a.id - b.id;
+      });
+
+    // Filter for pagination
+    const { _page, _limit } = request.query;
+
     const user = await User.findByPk(user_id, {
       include: { association: "challenges" },
     });
@@ -109,7 +117,24 @@ class ChallengeController {
       });
     }
 
-    response.json(user.challenges);
+    if (_page && _limit) {
+      let page = _page * _limit - _limit;
+
+      let challangesByPage = await Challenge.findAndCountAll({
+        where: {
+          user_id,
+        },
+        limit: _limit,
+        offset: page,
+      });
+
+      return response.json({
+        count: challangesByPage.count,
+        challenges: orderById(challangesByPage.rows),
+      });
+    }
+
+    return response.json(user.challenges);
   }
 
   async update(request, response) {
