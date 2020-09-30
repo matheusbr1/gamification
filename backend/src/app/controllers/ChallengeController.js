@@ -1,129 +1,160 @@
-import Challenge from '../models/Challenge'
-import auth from '../middleware/auth'
+import Challenge from "../models/Challenge";
+import User from "../models/User";
 
 class ChallengeController {
-    async store(request, response) {
+  async store(request, response) {
+    const {
+      title,
+      description,
+      deadline,
+      requester,
+      assignee,
+      status,
+      difficulty,
+    } = request.body;
 
-        const { title, description, deadline, requester, assignee, status } = request.body
+    const { user_id } = request.params;
 
-        const challenge = await Challenge.create({
-            title,
-            description,
-            deadline,
-            requester,
-            assignee,
-            status
-        })
+    // Buscando o user pelo ID
+    const user = await User.findByPk(user_id);
 
-        response.json({
-            message: 'Challenge Created sucessfuly',
-            challenge
-        })
+    if (!user) {
+      return response.json({
+        error: "User not found",
+      });
     }
 
-    async index(request, response) {
+    const challenge = await Challenge.create({
+      title,
+      description,
+      deadline,
+      requester,
+      assignee,
+      status,
+      difficulty,
+      user_id,
+    });
 
-        const orderById = array => array.sort(function (a, b) { return a.id - b.id });
+    return response.json({
+      message: "Challenge Created sucessfuly",
+      challenge,
+    });
+  }
 
-        let challenges = await Challenge.findAll()
+  async index(request, response) {
+    const orderById = (array) =>
+      array.sort(function (a, b) {
+        return a.id - b.id;
+      });
 
-        challenges = orderById(challenges)
+    let challenges = await Challenge.findAll();
 
-        const count = challenges.length
+    challenges = orderById(challenges);
 
-        response.set("x-total-count", challenges.length);
+    const count = challenges.length;
 
-        // Filter Params for pagination
-        const { _page, _limit } = request.query
+    response.set("x-total-count", challenges.length);
 
-        if (_page && _limit) {
+    // Filter Params for pagination
+    const { _page, _limit } = request.query;
 
-            let page = _page * _limit - _limit
+    if (_page && _limit) {
+      let page = _page * _limit - _limit;
 
-            let challangesByPage = await Challenge.findAndCountAll({
-                limit: _limit,
-                offset: page
-            });
+      let challangesByPage = await Challenge.findAndCountAll({
+        limit: _limit,
+        offset: page,
+      });
 
-            challangesByPage = orderById(challangesByPage.rows)
+      challangesByPage = orderById(challangesByPage.rows);
 
-            console.log(challangesByPage)
+      console.log(challangesByPage);
 
-            return response.json({
-                count,
-                challenges: challangesByPage
-            })
-        }
-
-        return response.json({
-            count,
-            challenges
-        })
-
+      return response.json({
+        count,
+        challenges: challangesByPage,
+      });
     }
 
-    async listByIndex(request, response) {
+    return response.json({
+      count,
+      challenges,
+    });
+  }
 
-        const { index } = request.params
+  async listByIndex(request, response) {
+    const { index } = request.params;
 
-        const challenge = await Challenge.findOne({
-            where: { id: index }
-        })
+    const challenge = await Challenge.findOne({
+      where: { id: index },
+    });
 
-        if (!challenge) {
-            return response.status(404).json({ error: "Challenge not found" })
-        }
-
-        response.json(challenge)
-
+    if (!challenge) {
+      return response.status(404).json({ error: "Challenge not found" });
     }
 
-    async update(request, response) {
+    response.json(challenge);
+  }
 
-        const { index } = request.params
+  async listByUser(request, response) {
+    const { user_id } = request.params;
 
-        const challenge = await Challenge.findByPk(index)
+    const user = await User.findByPk(user_id, {
+      include: { association: "challenges" },
+    });
 
-        console.log(challenge)
-
-        // Check if challenge exists
-        if (challenge === null) {
-            return response.status(404).json({ error: 'Challenge not found' })
-        }
-
-        try {
-            const challengeUpdated = await challenge.update(request.body)
-
-            return response.json({
-                massage: 'Challenge Updated',
-                challengeUpdated
-            })
-
-        } catch (error) {
-            console.log(error)
-            return response.status(400).json({ error: 'Unknow error' })
-        }
+    if (!user) {
+      return response.status(404).json({
+        error: "User not found",
+      });
     }
 
-    async delete(request, response) {
-        const { index } = request.params
+    response.json(user.challenges);
+  }
 
-        const challenge = await Challenge.findByPk(index)
+  async update(request, response) {
+    const { index } = request.params;
 
-        if (challenge === null) {
-            return response.status(404).json({ error: 'Challenge not found' })
-        }
+    const challenge = await Challenge.findByPk(index);
 
-        const challengeDeleted = await challenge.destroy({
-            where: { id: index }
-        })
+    console.log(challenge);
 
-        response.json({
-            message: 'Challenge Deleted',
-            challengeDeleted
-        })
-
+    // Check if challenge exists
+    if (challenge === null) {
+      return response.status(404).json({ error: "Challenge not found" });
     }
+
+    try {
+      const challengeUpdated = await challenge.update(request.body);
+
+      return response.json({
+        massage: "Challenge Updated",
+        challengeUpdated,
+      });
+    } catch (error) {
+      console.log(error);
+      return response.status(400).json({ error: "Unknow error" });
+    }
+  }
+
+  async delete(request, response) {
+    const { index } = request.params;
+
+    const challenge = await Challenge.findByPk(index);
+
+    if (challenge === null) {
+      return response.status(404).json({ error: "Challenge not found" });
+    }
+
+    const challengeDeleted = await challenge.destroy({
+      where: { id: index },
+    });
+
+    response.json({
+      message: "Challenge Deleted",
+      challengeDeleted,
+    });
+  }
 }
 
-export default new ChallengeController()
+export default new ChallengeController();

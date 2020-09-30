@@ -1,15 +1,14 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('challenges', {
-
+    return queryInterface.createTable("challenges", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       title: {
         type: Sequelize.STRING,
@@ -35,18 +34,33 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      difficulty: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      // Coluna da chave estrangeira
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('challenges');
-  }
+    return queryInterface.dropTable("challenges");
+  },
 };

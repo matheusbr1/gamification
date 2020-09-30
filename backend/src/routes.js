@@ -29,13 +29,16 @@ routes.put('/users/:index', auth, UserController.update)
 routes.delete('/users/:index', auth, UserController.delete)
 
 // Create Challenge
-routes.post('/challenges', auth, ChallengeController.store)
+routes.post('/users/:user_id/challenges', auth, ChallengeController.store)
 
 // List All Challenges
 routes.get('/challenges', auth, ChallengeController.index)
 
 // List a Challente by index
 routes.get('/challenges/:index', auth, ChallengeController.listByIndex)
+
+// List a Challente by user
+routes.get('/users/:user_id/challenges', auth, ChallengeController.listByUser)
 
 // Challenge Update
 routes.put('/challenges/:index', auth, ChallengeController.update)

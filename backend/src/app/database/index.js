@@ -14,6 +14,9 @@ class Database {
         this.connection = new Sequelize(databaseConfig)
 
         models.map(model => model.init(this.connection))
+
+        Challenge.associate(this.connection.models)
+        User.associate(this.connection.models)
     }
 }
 
