@@ -44,22 +44,14 @@ class UserController {
 
     const user = await User.findOne({
       where: { id: index },
+      attributes: ["id", "name", "coordinator", "avatar", "stars"],
     });
 
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
 
-    return response.json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      coordinator: user.coordinator,
-      avatar:
-        "/static/media/Artboards_Diversity_Avatars_by_Netguru-04.7591d041.png",
-      stars: Math.floor(Math.random() * 5),
-      challenges: [],
-    });
+    return response.json(user);
   }
 
   async update(request, response) {

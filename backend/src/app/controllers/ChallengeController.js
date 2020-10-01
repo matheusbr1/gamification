@@ -1,6 +1,8 @@
 import Challenge from "../models/Challenge";
 import User from "../models/User";
 
+import { parseISO, formatDistance } from "date-fns";
+
 class ChallengeController {
   async store(request, response) {
     const {
@@ -108,7 +110,20 @@ class ChallengeController {
     const { _page, _limit } = request.query;
 
     const user = await User.findByPk(user_id, {
-      include: { association: "challenges" },
+      include: {
+        association: "challenges",
+        attributes: [
+          "id",
+          "title",
+          "description",
+          "deadline",
+          "requester",
+          "assignee",
+          "status",
+          "difficulty",
+          "user_id",
+        ],
+      },
     });
 
     if (!user) {
@@ -121,6 +136,17 @@ class ChallengeController {
       let page = _page * _limit - _limit;
 
       let challangesByPage = await Challenge.findAndCountAll({
+        attributes: [
+          "id",
+          "title",
+          "description",
+          "deadline",
+          "requester",
+          "assignee",
+          "status",
+          "difficulty",
+          "user_id",
+        ],
         where: {
           user_id,
         },
@@ -142,14 +168,56 @@ class ChallengeController {
 
     const challenge = await Challenge.findByPk(index);
 
-    console.log(challenge);
-
     // Check if challenge exists
     if (challenge === null) {
       return response.status(404).json({ error: "Challenge not found" });
     }
 
     try {
+      const { status } = request.body;
+
+      // Se o update for no status preciso conferir se ele passou do prazo de entregar pra atualizar as estrelas do usuário
+
+      if (challenge.status !== status) {
+        // - Capturar a difuculdade
+        // - Checar quantos dias passou do deadline
+        // - 5 menos os dias passados do deadline e a dificuldade
+        const currentData = new Date();
+
+        const distance = formatDistance(challenge.deadline, currentData);
+
+        let starsAvarage = 0;
+
+        const DistanceNumber = parseInt(distance.split(" ")[0]);
+
+        // Distancia de dias
+        if (
+          (DistanceNumber >= 1 && distance.split(" ")[1] === "day") ||
+          (DistanceNumber >= 1 && distance.split(" ")[1] === "days")
+        ) {
+          DistanceNumber <= 5
+            ? (starsAvarage = (challenge.difficulty + (5 - DistanceNumber)) / 2)
+            : challenge.difficulty / 2;
+        }
+
+        // Distancia de meses
+        if (
+          distance.split(" ")[1] === "months" ||
+          distance.split(" ")[1] === "month"
+        ) {
+          starsAvarage = 0;
+        }
+
+        return response.json({
+          message: "mudança no status",
+          difficulty: challenge.difficulty,
+          deadline: challenge.deadline,
+          currentData,
+          distance,
+          starsAvarage,
+        });
+      }
+
       const challengeUpdated = await challenge.update(request.body);
 
       return response.json({
