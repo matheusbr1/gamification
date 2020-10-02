@@ -1,138 +1,158 @@
-import React, { useContext, useCallback, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import { AppContext } from '../../contexts/AppContext'
-import { AuthContext } from '../../contexts/AuthContext'
-import { Background } from '../../styles/global'
-import api from '../../services/api'
-import Button from '../../components/button'
-import Card from '../../components/card'
-import SpinnerLoading from '../../components/spinnerLoading'
-import UserStars from '../../Utils/userStars'
-import Bullets from '../../components/bullets'
-import Title from '../../components/title'
-import rankingIcon from '../../assets/RankingIcon.png'
-import { Container, UserDetails, RankingIcon, Challenges, ButtonCreateTaskContainer } from './style'
+import React, { useContext, useCallback, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { AppContext } from "../../contexts/AppContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { Background } from "../../styles/global";
+import api from "../../services/api";
+import Card from "../../components/card";
+import SpinnerLoading from "../../components/spinnerLoading";
+import UserStars from "../../Utils/userStars";
+import Bullets from "../../components/bullets";
+import Title from "../../components/title";
+import rankingIcon from "../../assets/RankingIcon.png";
+import {
+  Container,
+  UserDetails,
+  RankingIcon,
+  Challenges,
+  LogoutIcon,
+  CreateChallengeIcon
+} from "./style";
 
 function Dashboard() {
+  const history = useHistory();
 
-    const history = useHistory()
+  const { Appdata, setChallenges, loading, setLoading } = useContext(
+    AppContext
+  );
+  const { token, Authenticated, logOut } = useContext(AuthContext);
 
-    const { Appdata, setChallenges, loading, setLoading } = useContext(AppContext)
-    const { token, Authenticated } = useContext(AuthContext)
+  const { userId, name, IsCoordinator, avatar, challenges } = Appdata;
+  const [totalPages, setTotalPages] = useState(0);
+  const [openChallenges, setOpenChallenges] = useState(0);
+  const [currentChallengePage, setCurrentChallengePage] = useState(1);
+  const challengesPage = 4;
 
-    const { name, ocupation, avatar, challenges, } = Appdata
-    const [totalPages, setTotalPages] = useState(0)
-    const [openChallenges, setOpenChallenges] = useState(0)
-    const [currentChallengePage, setCurrentChallengePage] = useState(1)
-    const challengesPage = 4
+  const handleCreateChallenge = useCallback(() => {
+    history.push("/register/challenge");
+  }, [history]);
 
-    const handleCreateChallenge = useCallback(() => {
-        history.push('/register/challenge')
-    }, [])
+  const handleNatigateToRanking = useCallback(() => {
+    history.push("/ranking");
+  }, [history]);
 
-    const handleNatigateToRanking = useCallback(() => {
-        history.push('/ranking')
-    }, [])
+  useEffect(() => {
+    // Verify if user is authenticated
+    if (!Authenticated) return logOut();
 
-    const handleNavigateToLogin = useCallback(() => {
-        history.push('/')
-    })
+    api
+      .get("challenges", { headers: { authorization: `Bearer ${token}` } })
+      .then((response) => {
+        setOpenChallenges(() => {
+          return response.data.challenges.filter((challenge) => challenge.status === "open").length
+        });
+      });
+  }, [challenges]);
 
-    useEffect(() => {
+  useEffect(() => {
+    // Verify if user is authenticated
+    if (!Authenticated) return logOut();
 
-        // Verify if user is authenticated
-        if (!Authenticated) return handleNavigateToLogin()
+    getMoreItens(currentChallengePage);
+  }, []);
 
-        api.get('challenges', { headers: { authorization: `Bearer ${token}` } }).then(response => {
-            setOpenChallenges(() => response.data.challenges.filter(challenge => challenge.status === 'open').length)
-        })
-    }, [challenges, token])
+  const getMoreItens = useCallback((page) => {
+    console.log("Getting Itens page:", page);
+    setCurrentChallengePage(page);
 
-    useEffect(() => {
+    setLoading(true);
+    setChallenges([]);
 
-        // Verify if user is authenticated
-        if (!Authenticated) return handleNavigateToLogin()
+    return api
+      .get(`/users/${userId}/challenges?_page=${page}&_limit=${challengesPage}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then(async (response) => {
+        const { challenges, count } = response.data;
 
-        getMoreItens(currentChallengePage)
-    }, [])
+        let countItens = parseInt(response.headers["x-total-count"]);
 
-    const getMoreItens = useCallback(page => {
+        if (isNaN(countItens)) {
+          countItens = count;
+        }
 
-        console.log('Getting Itens page:', page)
-        setCurrentChallengePage(page)
+        if (countItens <= challengesPage) {
+          setTotalPages(1);
+        } else {
+          setTotalPages(() => {
+            const conditional =
+              countItens % 2 === 0 &&
+              challengesPage % 2 === 0 &&
+              countItens > 4 &&
+              countItens % challengesPage === 0;
+            return conditional
+              ? Math.floor(countItens / challengesPage)
+              : Math.floor(countItens / challengesPage + 1);
+          });
+        }
 
-        setLoading(true)
-        setChallenges([])
+        setChallenges(challenges);
+        setLoading(false);
+        console.log(challenges);
+      });
+  });
 
-        return api.get(`challenges?_page=${page}&_limit=${challengesPage}`, {
-            headers: { authorization: `Bearer ${token}` }
-        }).then(async response => {
+  return (
+    <Background>
+      <Container>
 
-            const { challenges, count } = response.data
+        <LogoutIcon onClick={logOut} />
+        {!!IsCoordinator && <CreateChallengeIcon onClick={handleCreateChallenge} />}
 
-            let countItens = parseInt(response.headers['x-total-count'])
+        <RankingIcon
+          src={rankingIcon}
+          className="rankingIcon"
+          onClick={handleNatigateToRanking}
+        />
 
-            if (isNaN(countItens)) {
-                countItens = count
-            }
+        <UserDetails>
+          <img src={avatar} alt="User Avatar" />
+          <div>
+            <p>{name}</p>
+            <span className="openTasks">{openChallenges} Open Challenges</span>
+            <span className="Stars">{UserStars(5)}</span>
+          </div>
+        </UserDetails>
 
-            if (countItens <= challengesPage) {
-                setTotalPages(1)
-            } else {
-                setTotalPages(() => {
-                    const conditional = countItens % 2 === 0 && challengesPage % 2 === 0 && countItens > 4 && countItens % challengesPage === 0
-                    return conditional ? Math.floor(countItens / challengesPage) :
-                        Math.floor(countItens / challengesPage + 1)
-                })
-            }
-
-            setChallenges(challenges)
-            setLoading(false)
-            console.log(challenges)
-        })
-    })
-
-    return (
-        <Background>
-            <Container>
-                {ocupation === 'coordinator' && (<ButtonCreateTaskContainer>
-                    <Button onClick={handleCreateChallenge} >Create a challenge</Button>
-                </ButtonCreateTaskContainer>)}
-
-                <RankingIcon src={rankingIcon} className="rankingIcon" onClick={handleNatigateToRanking} />
-
-                <UserDetails>
-                    <img src={avatar} alt='User Avatar' />
-                    <div>
-                        <p>{name}</p>
-                        <span className="openTasks" >{openChallenges} Open Challenges</span>
-                        <span className="Stars" >{UserStars(5)}</span>
-                    </div>
-                </UserDetails>
-
-                <Challenges>
-                    {(loading) ? <SpinnerLoading /> :
-                        (challenges.length === 0 && openChallenges.length === 0) ? (
-                            <h2>You don’t have any challange</h2>
-                        ) :
-                            (<>
-                                <Title>Your Challenges</Title>
-                                <div className="challengeBox" >
-                                    {challenges.map(challenge => (
-                                        <Card
-                                            key={challenge.id}
-                                            challengesPage={challengesPage}
-                                            currentChallengePage={currentChallengePage}
-                                            challenge={challenge}
-                                        />
-                                    ))}
-                                </div>
-                                <Bullets totalPages={totalPages} getMoreItens={getMoreItens} origin='Dashboard' />
-                            </>)}
-                </Challenges>
-            </Container>
-        </Background>
-    )
+        <Challenges>
+          {loading ? (
+            <SpinnerLoading />
+          ) : challenges.length === 0 || openChallenges.length === 0 ? (
+            <h2>You don’t have any challange</h2>
+          ) : (
+                <>
+                  <Title>Your Challenges</Title>
+                  <div className="challengeBox">
+                    {challenges.map((challenge) => (
+                      <Card
+                        key={challenge.id}
+                        challengesPage={challengesPage}
+                        currentChallengePage={currentChallengePage}
+                        challenge={challenge}
+                      />
+                    ))}
+                  </div>
+                  <Bullets
+                    totalPages={totalPages}
+                    getMoreItens={getMoreItens}
+                    origin="Dashboard"
+                  />
+                </>
+              )}
+        </Challenges>
+      </Container>
+    </Background>
+  );
 }
 
-export default Dashboard
+export default Dashboard;

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { IoMdExit, IoIosCreate } from 'react-icons/io'
 
 export const Container = styled.div`
     display: flex;
@@ -15,34 +16,6 @@ export const Container = styled.div`
         overflow-y: auto;
     }
 `
-
-export const ButtonCreateTaskContainer = styled.div`
-    position: absolute;
-    right: 10px;
-    top: 10px;
-      
-    button {
-        font-size: 16px !important;
-        height: 60px;
-        padding: 15px;
-    }
-
-    @media(max-width: 768px) {
-        
-        align-self: flex-end;
-        max-width: unset;
-        margin-bottom: 15px;
-        margin-right: 15px;
-        position: unset;
-        
-        button {
-            font-size: 13px !important;
-            padding: unset;
-            height: 40px !important;
-        }
-    }
-`
-
 export const Challenges = styled.div`
     
     display: flex;
@@ -66,6 +39,11 @@ export const Challenges = styled.div`
         
         margin: 15px 0px;
         height: unset;
+        width: 100%;
+
+        h2 {
+            margin: 10% 0;
+        }
 
         div.challengeBox {
             display: flex;
@@ -145,9 +123,23 @@ export const UserDetails = styled.div`
             width : 95%;
             
             p, span{
-                font-size: 6vw;
+                font-size: 5vw;
             } 
         }
      }
 
+`
+
+export const LogoutIcon = styled(IoMdExit)`
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 50px;
+`
+
+export const CreateChallengeIcon = styled(IoIosCreate)`
+    position: absolute;
+    top: 13px;
+    right: 68px;
+    font-size: 50px;
 `

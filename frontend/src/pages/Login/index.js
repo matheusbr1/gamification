@@ -19,7 +19,7 @@ function Login() {
     let history = useHistory();
 
     const { SaveToken, setAuthenticated, ClearStoragedToken, token } = useContext(AuthContext)
-    const { ClearStoragedAppData } = useContext(AppContext)
+    const { ClearStoragedAppData, setUserId } = useContext(AppContext)
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -32,6 +32,7 @@ function Login() {
     }, [])
 
     useEffect(() => {
+        console.log(token)
         if (!!token) {
             history.push('/dashboard')
             setAuthenticated(true)
@@ -39,7 +40,6 @@ function Login() {
     }, [])
 
     const handleStart = async () => {
-
         const sign = await api.post('/auth', {
             email,
             password
@@ -48,6 +48,9 @@ function Login() {
         if (!sign) {
             return alert('Error')
         }
+
+        const { user_id } = sign.data
+        setUserId(user_id)
 
         setAuthenticated(true)
 

@@ -36,8 +36,7 @@ function RegisterAvatar() {
 
     const handleSelectedIcon = useCallback(avatarSelected => {
         setAvatar(avatarSelected)
-        CreateUser()
-        history.push('/dashboard')
+        CreateUser(avatarSelected)
     }, [])
 
     return (

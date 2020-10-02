@@ -22,7 +22,7 @@ function RegisterName() {
     const [errors, setErrors] = useState({})
 
     const handleCheckIsCoordinator = useCallback(event => {
-        setIsCoordinator(event.target.value)
+        setIsCoordinator((event.target.value === 'coordinator' ? true : false))
     }, [IsCoordinator])
 
     const handleValidate = useCallback(async () => {

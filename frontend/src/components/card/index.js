@@ -9,7 +9,7 @@ function Card(props) {
     const { token } = useContext(AuthContext)
 
     const { Appdata, setChallenges, setLoading } = useContext(AppContext)
-    const { challenges } = Appdata
+    const { challenges, userId } = Appdata
     const { currentChallengePage, challengesPage } = props
 
     const handleChangeChallengeStatus = (id, status) => {
@@ -25,7 +25,7 @@ function Card(props) {
         }, {
             headers: { authorization: `Bearer ${token}` }
         })
-            .then(() => api.get(`challenges?_page=${currentChallengePage}&_limit=${challengesPage}`, {
+            .then(() => api.get(`/users/${userId}/challenges?_page=${currentChallengePage}&_limit=${challengesPage}`, {
                 headers: { authorization: `Bearer ${token}` }
             }))
             .then(response => {

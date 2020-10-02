@@ -1,9 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react'
 import api from '../services/api'
+import { AppContext } from "./AppContext";
+import { useHistory } from "react-router-dom";
 
 export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
+
+    const history = useHistory()
 
     const storagedToken = localStorage.getItem('@Gamification:auth')
     const handleStorageToken = () => (storagedToken) ? JSON.parse(storagedToken) : ''
@@ -17,7 +21,7 @@ const AuthProvider = ({ children }) => {
 
     const ClearStoragedToken = () => localStorage.removeItem('@Gamification:auth');
 
-    const [Authenticated, setAuthenticated] = useState(false)
+    const [Authenticated, setAuthenticated] = useState(!!token ? true : false)
 
     useEffect(() => {
         console.log('Authenticated:', Authenticated)
@@ -41,6 +45,16 @@ const AuthProvider = ({ children }) => {
 
     })
 
+    const { ClearStoragedAppData } = useContext(AppContext)
+
+    const logOut = () => {
+        setToken()
+        setAuthenticated(false)
+        ClearStoragedAppData()
+        ClearStoragedToken()
+        return history.push('/')
+    }
+
     return (
         <AuthContext.Provider value={{
             token,
@@ -48,6 +62,7 @@ const AuthProvider = ({ children }) => {
             ClearStoragedToken,
             Authenticated,
             setAuthenticated,
+            logOut
         }} >
             { children}
         </AuthContext.Provider>

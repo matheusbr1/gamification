@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { Background } from '../../styles/global'
 import { Container, RankingIcon, Avatar } from './style'
 import { AppContext } from '../../contexts/AppContext'
-import rankingIcon from '../../assets/RankingIcon.png'
 import RankingCard from '../../components/rankingCard'
 import api from '../../services/api'
 import SpinnerLoading from '../../components/spinnerLoading'
@@ -27,9 +26,10 @@ function Ranking() {
     })
 
     const getUsers = async () => {
-        const users = await api.get('users')
-        console.log(users.data)
-        setUsers(users.data)
+        const response = await api.get('/ranking?_limit=8&_page=1')
+        const { users, count } = response.data
+        console.log(response)
+        setUsers(users)
         setLoading(false)
     }
 
@@ -37,8 +37,6 @@ function Ranking() {
         <Background>
             <Container>
                 <Avatar src={avatar} onClick={handleNavigateToDashboard} />
-                {/* <RankingIcon src={rankingIcon} /> */}
-
                 <Title>Ranking</Title>
 
                 {loading ? <SpinnerLoading /> : (<>

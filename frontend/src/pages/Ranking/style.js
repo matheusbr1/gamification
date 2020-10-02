@@ -9,20 +9,23 @@ export const Container = styled.div`
     align-items: center;
 
     div.rankingCardsContainer {
-        display: flex;
-        flex-wrap: wrap;
         margin: 20px 0;
-        justify-content: space-evenly;
-        width: 660px;
-        height: 430px;
+        height: 50%;
+        display: grid;
+        grid-gap: 2%;
+        grid-template-columns: 49% 49%;
+        grid-template-rows: repeat(5, 20%)
     }
 
     @media(max-width:768px) {
         div.rankingCardsContainer {
             display: flex;
-            width: 95%;
+            flex-direction: column;
+            width: 100%;
+            height: unset;
         }
     }
+    
 `
 
 export const RankingIcon = styled.img`

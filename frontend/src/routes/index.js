@@ -13,8 +13,8 @@ import Ranking from '../pages/Ranking'
 
 function routes() {
     return (
-        <AuthProvider>
-            <AppProvider>
+        <AppProvider>
+            <AuthProvider>
                 <Switch>
                     <Route path="/" exact component={Login} />
                     <Route path="/register" exact component={RegisterPerson} />
@@ -23,8 +23,8 @@ function routes() {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/ranking" component={Ranking} />
                 </Switch>
-            </AppProvider>
-        </AuthProvider>
+            </AuthProvider>
+        </AppProvider>
     )
 }
 

@@ -12,14 +12,17 @@ export const Container = styled.input`
 
     @media screen and (max-width: 768px ) {
         width: 90%;
-        height:70px;
+        height: 60px;
+        padding: 0 22px;
+        font-size: 20px;
+        margin: 10px auto;
     }
 
     ${props => !props.margin && css`
-        margin: 0 auto;;
+        margin: 0 auto;
     `}
 
     ${props => props.isFocused && css`
-        border-color: #2B95F2;
+        border: solid 2px #2B95F2;
     `}
 `

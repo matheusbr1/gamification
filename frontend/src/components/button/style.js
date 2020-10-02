@@ -5,7 +5,7 @@ export const ButtonStyle = styled.button`
     height:80px;
     width: 100%;
     
-    max-width: 380px;
+    max-width: 360px;
     
     font-size: 40px;
     border-radius:20px;
@@ -17,8 +17,10 @@ export const ButtonStyle = styled.button`
     margin: 0 auto;
 
     @media screen and (max-width: 768px) {
-        height:70px;
+        height: 60px;
         width: 90%;
+        max-width:290px;
+        font-size: 25px;
     }
 
     &:hover {

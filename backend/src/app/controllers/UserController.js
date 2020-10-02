@@ -35,7 +35,9 @@ class UserController {
   }
 
   async list(request, response) {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes: ["id", "name", "coordinator", "stars", "avatar"],
+    });
     return response.json(users);
   }
 

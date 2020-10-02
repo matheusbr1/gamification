@@ -48,7 +48,7 @@ export const Container = styled.div`
         font-size: 25px;
 
         @media(max-width: 768px) {
-            font-size: 20px;
+            font-size: 5vw
         }
     }
 
