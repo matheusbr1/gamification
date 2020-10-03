@@ -1,7 +1,7 @@
 import Challenge from "../models/Challenge";
 import User from "../models/User";
 
-import { parseISO, formatDistance } from "date-fns";
+import { formatDistance } from "date-fns";
 
 class ChallengeController {
   async store(request, response) {
@@ -208,12 +208,11 @@ class ChallengeController {
           starsAvarage = 0;
         }
 
+        const challengeUpdated = await challenge.update(request.body);
+
         return response.json({
-          message: "mudança no status",
-          difficulty: challenge.difficulty,
-          deadline: challenge.deadline,
-          currentData,
-          distance,
+          massage: "Challenge Updated",
+          challengeUpdated,
           starsAvarage,
         });
       }

@@ -25,9 +25,13 @@ function Card(props) {
         }, {
             headers: { authorization: `Bearer ${token}` }
         })
-            .then(() => api.get(`/users/${userId}/challenges?_page=${currentChallengePage}&_limit=${challengesPage}`, {
-                headers: { authorization: `Bearer ${token}` }
-            }))
+            .then((response) => {
+                console.log(response)
+
+                return api.get(`/users/${userId}/challenges?_page=${currentChallengePage}&_limit=${challengesPage}`, {
+                    headers: { authorization: `Bearer ${token}` }
+                })
+            })
             .then(response => {
                 setChallenges(response.data.challenges)
                 console.log(response.data.challenges)

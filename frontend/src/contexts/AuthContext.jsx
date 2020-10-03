@@ -36,6 +36,10 @@ const AuthProvider = ({ children }) => {
             if (response.status === 400) {
                 alert(`Error: ${response.data.message}`)
             }
+            if (response.status === 401) {
+                console.log(`Error: ${response.data.message}`)
+                return logOut()
+            }
             if (response.status !== 400 && response.status !== 401 && response.status !== 403) {
                 setAuthenticated(true)
             }

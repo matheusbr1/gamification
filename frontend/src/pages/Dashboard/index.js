@@ -73,6 +73,9 @@ function Dashboard() {
         headers: { authorization: `Bearer ${token}` },
       })
       .then(async (response) => {
+
+        if (response == undefined) return
+
         const { challenges, count } = response.data;
 
         let countItens = parseInt(response.headers["x-total-count"]);
