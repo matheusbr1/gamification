@@ -1,4 +1,4 @@
-# Learn with gamification
+## Learn with gamification
 Lean with gamification is a game in which your coordinator register a challenge for you, finish your challenges to learn and enter the raking of users.
 
 ### For execute in your machine ☕
