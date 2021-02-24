@@ -18,7 +18,8 @@ $ yarn (or npm) install
 
 </pre>
 
-![teste1](https://user-images.githubusercontent.com/28275815/95516916-6342d200-0996-11eb-8491-6b65cea13a1a.png)
+![image](https://user-images.githubusercontent.com/28275815/108932574-5b738980-7628-11eb-90cf-6902f34ad7e1.png)
+![image](https://user-images.githubusercontent.com/28275815/108932620-70501d00-7628-11eb-852a-d857b65c1107.png)
 
 ### Main technologies and libs
 <ul>
